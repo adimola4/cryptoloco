@@ -1,0 +1,10 @@
+ update_all_sources:
+   cron: "*/2 * * * *" 
+   class: "Source::UpdateWorker"
+ update_currencies:
+   cron: "*/2 * * * *" 
+   class: "Currency::UpdateWorker"
+ update_trending_currencies:
+   corn: "00 6 * * *"
+   class: "Currency::TrendingWorker"
+   

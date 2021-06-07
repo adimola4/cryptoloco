@@ -1,0 +1,8 @@
+<a   (click)='showCurrency()' (window:resize)="resizePage($event)"class="grid grid-cols-4 mr-14 sm:mr-7 gap-x-6 grid-rows-2 sm:rounded-lg  hover:shadow-2xl pl-2   sm:border-none  left-0 right-0 text-sm">
+      <span class="col-start-1">{{currency?.code | uppercase }}</span>      
+      <span *ngIf="IsMobile" class="row-start-2 col-span-2">
+            <img src="{{currency?.img_url}}"/>      
+      </span>
+      <span [ngClass]="{'text-green-400' : currency_prec === true , 'text-red-400' : currency_prec === false  }"  class="row-start-2 col-start-3 " >{{currency?.p1h   }}%</span>      
+      <span class="col-start-3 " >{{currency?.price_usd | currency:'USD' }}</span>
+</a>

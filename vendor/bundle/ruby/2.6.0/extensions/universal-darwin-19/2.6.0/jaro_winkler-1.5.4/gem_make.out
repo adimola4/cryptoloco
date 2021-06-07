@@ -1,0 +1,19 @@
+current directory: /Users/adimola/Projects/Angular/cryptoloco/vendor/bundle/ruby/2.6.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /Library/Ruby/Site/2.6.0 -r ./siteconf20210420-98838-19hwtfu.rb extconf.rb
+creating Makefile
+
+current directory: /Users/adimola/Projects/Angular/cryptoloco/vendor/bundle/ruby/2.6.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+make DESTDIR\= clean
+
+current directory: /Users/adimola/Projects/Angular/cryptoloco/vendor/bundle/ruby/2.6.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+make DESTDIR\=
+compiling adj_matrix.c
+compiling codepoints.c
+compiling jaro.c
+compiling jaro_winkler.c
+linking shared-object jaro_winkler/jaro_winkler_ext.bundle
+ld: warning: directory not found for option '-L/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.Internal.sdk/usr/local/lib'
+
+current directory: /Users/adimola/Projects/Angular/cryptoloco/vendor/bundle/ruby/2.6.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 jaro_winkler_ext.bundle ./.gem.20210420-98838-1m0l387/jaro_winkler

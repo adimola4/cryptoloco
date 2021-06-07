@@ -1,0 +1,29 @@
+<div class="flex flex-col flex-shrink-0 grid-cols-1 gap-4 items-center  dark:text-red-50 h-screen">
+    <div class="relative top-0 flex flex-col h-2/6 w-full  pb-3  flex-shrink-0 m-0 p-0">
+            <div class="absolute top-0  flex  w-full h-full items-center no-scrollbar no-scrollbar::-webkit-scrollbar overflow-scroll pb-8">
+                <ng-container  *ngIf="!loading_tweets;else loading" >
+                    <tweet *ngFor="let tweet of   ( tweets$ | async) | sortBy: 'desc': 'created_at'" [tweet]="tweet" class="scroller"></tweet>
+                </ng-container>
+                <ng-template #loading>
+                    <spinner text="loading tweets"></spinner>
+                </ng-template>
+            </div>
+            <div class="bottom-0 absolute w-full flex items-center  bg-white dark:bg-black-300">
+                <p class="text-lg pt-1 text-gray-700 dark:text-gray-400" >Add twitter Account</p>
+                <div class="w-1/2 flex flex-col" >
+                    <input type="text"  [(ngModel)]="twitter_user_name"
+                    class="text-sm  bg-transparent border-none focus:outline-none  focus:border-transparent focus:ring-transparent focus:bg-transparent border-transparent"
+                    placeholder="@Twitter_User_Name..." />
+                    <p *ngIf="showError" class=" text-xs text-red-900 italic font-bold">❗️{{showError}}</p>
+                    <p *ngIf="showSuccess" class=" text-xs text-Green-200 italic font-bold">✅{{showError}}</p>
+                </div>
+                
+                <button (click)="handleAddTwitterAccount()" class="inline-block left-0 cursor-auto bg-transparent text-xs text-gray-700 dark:text-gray-400 hover:bg-teal text-teal font-semibold dark:hover:text-white py-2 px-6 border border-teal hover:border-transparent rounded-full">
+                        Follow
+                </button>
+            </div>
+    </div>
+    <div *ngIf="!IsMobile" class="flex h-4/6 border-t-2 w-full flex-row  flex-shrink-0 m-0 p-0 overflow-hidden">
+        <content-container class="w-full no-scrollbar no-scrollbar::-webkit-scrollbar overflow-scroll"></content-container>
+    </div>
+</div>

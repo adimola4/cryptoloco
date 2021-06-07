@@ -1,0 +1,75 @@
+<div class="relative h-screen w-screen md:flex">
+  <!-- content -->
+    <div class="flex-1 grid grid:rows-2 h-full w-full sm:grid-cols-2 sm:gap-2 p-1.5 px-2 sm:pl-0 text-2xl dark:bg-black-300 font-bold text-black dark:text-green-500  sm:border-r-2 border-gray-400 ">
+
+
+      <div class=" sm:border-r-1 no-scrollbar no-scrollbar::-webkit-scrollbar overflow-scroll  w-full  sm:border-r-2 border-gray-400">
+        <div class="flex flex-col sm:flex-row sm:flex  sticky   -top-2 z-10 justify-between  border-b-2 border-gray-400 -mb-px -mt-0.5 bg-white dark:bg-black-300">
+            <search-input (searchEvent)=searchChange($event) class="border-b-2 border-gray-400 sm:border-none" ></search-input>
+            <div class="flex flex-row">
+              <span class=" sm:border-Gray-200 sm:border-l-2 pl-2 align-middle text-center items-center flex text-base  font-light sm:font-medium text-gray-600">Filter: </span>
+              <button (click)="searchChange('News')"  class="flex items-center w-full py-2.5 sm:py-0 px-4 rounded transition duration-200 hover:text-black  dark:hover:text-white">
+                  <svg viewBox="0 0 24 24" class="h-6 w-10 inline-block mb-1   rounded-xl bg-gradient-to-br from-blue-800 to-rose-500 ring-offset-4"><path d="M8 9a1 1 0 011-1h8a1 1 0 011 1v7.5a1.5 1.5 0 01-1.5 1.5h-7A1.5 1.5 0 018 16.5V9z" fill="#6EE7B7"></path><path d="M15 7a1 1 0 00-1-1H7a1 1 0 00-1 1v9.5A1.5 1.5 0 007.5 18H16v-.085a1.5 1.5 0 01-1-1.415V7z" fill="#ECFDF5"></path><path fill="#A7F3D0" d="M8 8h5v4H8zM8 14h5v2H8z"></path></svg>            
+                  <span class="relative ml-5 text-Aqua-200 text-lg">News</span>
+              </button>
+              <button (click)="searchChange('Media')"  class="flex items-center w-full py-2.5 sm:py-0 px-4 rounded transition duration-200  hover:text-black  dark:hover:text-white">
+                  <svg viewBox="0 0 24 24" class="h-6 w-10 inline-block mb-1  rounded-full bg-gradient-to-br from-red-500 to-rose-500 ring-offset-4"><circle cx="12" cy="12" r="7" fill="#F3E8FF"></circle><path d="M14.52 11.136a1 1 0 010 1.728l-3.016 1.759A1 1 0 0110 13.759v-3.518a1 1 0 011.504-.864l3.015 1.76z" fill="#C084FC"></path></svg>
+                  <span class="relative ml-5 text-Aqua-200  text-lg">Media</span>
+              </button>
+            </div>
+        </div>
+        <ng-container  *ngIf="!loading_articles;else loadingfeed" class="p-0 w-full">                
+                <article-card (click)=articleClick(article)
+                  *ngFor="let article of articles$ | async"
+                  [article]="article"
+                  routerLinkActive="active"                                 
+                  (articleLinkClick)="articleClick($event)"
+                  class="article-card dark:bg-black-300 opacity-10">
+                </article-card>                    
+            <div *ngIf="!articles"> No articles found to your search</div>
+        </ng-container>
+        <ng-template #loadingfeed class="p-0 w-full ">
+          <spinner text="loading articles..."></spinner>
+        </ng-template>
+    </div>
+      <div class=" hidden sm:block no-scrollbar no-scrollbar::-webkit-scrollbar overflow-scroll bg-transparent w-full m-0">
+          <ng-container  *ngIf="contentType==='Article'">
+            <app-article [article]="shownArticle"></app-article>
+          </ng-container>
+          <ng-container *ngIf="contentType==='Currency'">
+              <template #currencycontainer>
+              </template>
+          </ng-container>
+          <ng-container *ngIf="contentType==='Default'">
+            <default-view-content></default-view-content>
+          </ng-container>
+        <!-- <router-outlet ></router-outlet> -->
+      </div>
+    </div>
+    <div class="currency flex pt-24 text-gray-700 dark:text-green-400  bg-White-100 dark:bg-black-300 dark:text-purple-lighter  w-36 space-y-6 p-0 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
+    <div @fadeInGrow  class="no-scrollbar overflow-scroll">      
+      <app-currency   *ngFor="let currency of currencies"
+                     [currency]="currency"
+                     (shownCurrency)="currencyClick($event)"
+                     routerLinkActive="active"
+                     class="grid grid-flow-row text-gray-700 dark:text-gray-400 mr-7 font-serif text-sm cursor-pointer">
+      </app-currency>
+    </div>  
+    </div>
+
+    
+</div>
+    
+    
+    
+    <!-- 
+    <div class="app-layout">
+        <div class="app-left-pane app pane"></div>
+        <div class="app-center-pane">
+            <div class="app-main-container"></div>
+            <div class="app-footer"></div>
+            <div class="mobile-nav"></div>
+        </div>
+        <div class="app-right-pane"></div>
+    </div>  -->
+

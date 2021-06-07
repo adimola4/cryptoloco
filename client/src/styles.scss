@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+td .ngx-charts{
+    height: 40px !important;
+    width: 60px !important;
+    top: 0;
+    left: 0;
+    
+    .chart-legend{
+        top:0 !important;
+        margin: 0 !important;
+    }
+}
+
+.chart-legend{
+    position: relative;
+    top: -60px;
+    margin: 2px;
+    display: inline-flex !important;
+    justify-content: center;
+    .legend-wrap{
+        display: flex;
+        justify-content: center;
+    }
+    .ngx-charts-outer{
+        left: -30px;
+        position: relative;
+    }
+}
+
+.chart-legend .legend-labels{
+    display: flex;
+    width: 50% !important;
+    justify-content: center;
+    background: none !important;
+}
+.chart-legend .legend-label{
+    display: flex;
+    width: 50% !important;
+
+}
+
+.chart-legend .legend-title{
+    
+    color: #a26e1e;
+    text-align: center;
+}
