@@ -17,14 +17,6 @@ if File.exist?(schedule_file)
   Sidekiq::Cron::Job.load_from_hash!(YAML.load_file(schedule_file))
 end
 
-if Gem::Version.new(Sidekiq::VERSION) < Gem::Version.new('6.1')
-  Redis.exists_returns_integer = true
-else
-  raise 'Time to remove Redis.exists_returns_integer: https://github.com/mperham/sidekiq/issues/4591'
-end
- 
-
-
 if Rails.env.development?
     Sidekiq.configure_server do |config|
       config.redis = { url: 'redis://localhost:6379/0'}
