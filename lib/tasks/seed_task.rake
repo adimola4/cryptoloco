@@ -1,6 +1,6 @@
 task seed_task: :environment do
 
-Cointelegraph
+
 Source.create_or_find_by!(
     Domain: 'cointelegraph.com',
     title: 'Cointelegraph',
