@@ -1,7 +1,7 @@
 import { Source } from "./source";
 
-export class Category{
-    title:  string;
-    slug: string;
-    sources: Source[];
+export class Category {
+	title: string;
+	slug: string;
+	sources: Source[];
 }

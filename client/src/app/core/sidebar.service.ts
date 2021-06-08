@@ -1,30 +1,31 @@
-import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnInit } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: "root"
 })
 export class SideBarService implements OnInit {
-  private showSideBar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+	private showSideBar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+		false
+	);
 
-  constructor() { }
+	constructor() {}
 
-  ngOnInit() {
-  }
+	ngOnInit() {}
 
-  getSideBar(){
-    return this.showSideBar$.asObservable();
-  }
+	getSideBar() {
+		return this.showSideBar$.asObservable();
+	}
 
-  setShowSideBar(show: boolean) {
-    this.showSideBar$.next(show);
-  }
+	setShowSideBar(show: boolean) {
+		this.showSideBar$.next(show);
+	}
 
-  toggleSideBarState() {
-    this.showSideBar$.next(!this.showSideBar$.value);
-  }
+	toggleSideBarState() {
+		this.showSideBar$.next(!this.showSideBar$.value);
+	}
 
-  isSideBarOpen() {
-    return this.showSideBar$.value;
-  }
+	isSideBarOpen() {
+		return this.showSideBar$.value;
+	}
 }

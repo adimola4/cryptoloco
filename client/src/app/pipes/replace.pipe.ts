@@ -1,18 +1,20 @@
-import { NUMBER_TYPE } from '@angular/compiler/src/output/output_ast';
-import { Pipe, PipeTransform } from '@angular/core';
+import { NUMBER_TYPE } from "@angular/compiler/src/output/output_ast";
+import { Pipe, PipeTransform } from "@angular/core";
 
-@Pipe({name: 'replace'})
+@Pipe({ name: "replace" })
 export class ReplacePipe implements PipeTransform {
-  transform(value: number, strToReplace: string, replacementStr: string): number {
+	transform(
+		value: number,
+		strToReplace: string,
+		replacementStr: string
+	): number {
+		if (!value || !strToReplace || !replacementStr) {
+			return value;
+		}
+		let r = Number(value);
 
-    if(!value || ! strToReplace || ! replacementStr)
-    {
-      return value;
-    }
-    let r = Number(value)
-
-    // let r = value.toString().replace(new RegExp(strToReplace, 'g'), replacementStr)
-    console.log(r);
- return r;
-  }
+		// let r = value.toString().replace(new RegExp(strToReplace, 'g'), replacementStr)
+		console.log(r);
+		return r;
+	}
 }

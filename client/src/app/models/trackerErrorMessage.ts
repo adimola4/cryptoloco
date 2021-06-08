@@ -1,5 +1,5 @@
 export class TrackerErrorMessage {
-  errorNumber: number;
-  errorMessage: string;
-  messageView: string;
+	errorNumber: number;
+	errorMessage: string;
+	messageView: string;
 }

@@ -1,12 +1,20 @@
 {
   "name": "client",
   "version": "0.0.0",
+  "repository": {
+    "url": "https://github.com/adimola4/cryptoloco.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "karma": "karma",
+    "karma.start": "karma start",
+    "reinstall": "npm cache clean && npm install",
+    "prettier": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts,.html,.scss}\"",
+    "prettier-format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts,.html,.scss}\"",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -46,6 +54,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "prettier": "^2.3.1",
     "protractor": "~7.0.0",
     "tailwindcss": "^2.1.1",
     "ts-node": "~8.3.0",
