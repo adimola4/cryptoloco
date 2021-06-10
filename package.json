@@ -14,7 +14,7 @@
   },
   "scripts": {
    
-    "deploy": "cp -a client/dist/. public/",
+    "deploy": "cp -a client/dist/client. public/",
     "heroku-postbuild": "npm run build && npm run deploy"
   }
 }
