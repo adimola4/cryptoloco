@@ -13,7 +13,7 @@
     "npm": "^6.12.1"
   },
   "scripts": {
-    "build": "npm --cwd client install && npm --cwd client build",
+    "build": "webpack",
     "deploy": "cp -a client/dist/. public/",
     "heroku-postbuild": "npm run build && npm run deploy"
   }
