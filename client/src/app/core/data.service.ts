@@ -16,12 +16,14 @@ import { Currency } from "../models/currency";
 import { Category } from "../models/category";
 import { TrackerErrorMessage } from "../models/trackerErrorMessage";
 import { Tweet } from "../models";
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
 	providedIn: "root"
 })
 export class DataService {
-	API_URL = "http://localhost:3000/api/v1/";
+	API_URL = environment.production? "https://cryptoloco.herokuapp.com/:3000/api/v1/" : "http://localhost:3000/api/v1/" ;
 	TOP_CURRENCIES_API_URL = "https://api.coingecko.com/api/v3/search/trending";
 
 	API_CHART_90d = (a: string) => {
