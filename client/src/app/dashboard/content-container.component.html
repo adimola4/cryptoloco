@@ -3,15 +3,15 @@
     <div class="relative flex flex-col min-w-0 break-words w-full h-full  shadow-lg rounded">
       <div class=" py-5 flex-auto ">
         <div class="flex justify-between ">
-          <h5 class=" text-2xl text-center"><span class="animate-pulse">🔥🔥🔥</span> Top Trending Now <span class="animate-pulse">🔥🔥🔥</span> </h5>
+          <h5 class="text-black-100 dark:text-Orange-200 text-2xl text-center"><span class="animate-pulse">🔥🔥🔥</span> Top Trending Now <span class="animate-pulse">🔥🔥🔥</span> </h5>
           <nav class="overflow-hidden tabs flex flex-wrap flex-col gap-0  sm:flex-row items-center justify-center
                      text-base  border-t-2 border-l-2 border-r-2 rounded-tl-xl rounded-tr-xl  border-gray-400 ">
               <button (click)="toggleTabs(1)" class="tab h-full px-6 block focus:outline-none "
-                      [ngClass]="{' text-gray-600  bg-gray-300 dark:bg-black-200': openTab !== 1, 'font-bold text-black dark:text-white bg-transparent ': openTab === 1}">
+                      [ngClass]="{' text-gray-600  bg-gray-300 dark:bg-black-200': openTab !== 1, 'font-bold text-black dark:text-Aqua-100 bg-transparent ': openTab === 1}">
                 Table
               </button>
               <button  (click)="toggleTabs(2)" class="tab h-full px-6 block  focus:outline-none "
-                      [ngClass]="{' text-gray-600  bg-gray-300 dark:bg-black-200': openTab !== 2, 'font-bold text-black dark:text-white bg-transparent': openTab === 2}">
+                      [ngClass]="{' text-gray-600  bg-gray-300 dark:bg-black-200': openTab !== 2, 'font-bold text-black dark:text-Aqua-100 bg-transparent': openTab === 2}">
                 Chart
               </button>
           </nav>  
@@ -50,7 +50,7 @@
                       <td class="py-4 px-2 whitespace-no-wrap border-b text-center border-gray-500">
                         <div class="flex flex-row justify-between items-center gap-5">
                           <img class="flex h-10 w-10 rounded-full" src="{{currency?.img_url}}"/> 
-                          <div class="flex text-sm leading-5 text-left font-semibold uppercase ">{{currency.code}}</div>
+                          <div class="flex text-sm leading-5 text-left text-Aqua-100 font-semibold uppercase ">{{currency.code}}</div>
                         </div>
                         
                       </td>				

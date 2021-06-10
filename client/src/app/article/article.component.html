@@ -1,21 +1,21 @@
 <div @fadeSlideGrowKeyframe *ngIf="article.type_of_content === null || (article.type_of_content ==='Article')" class="grid grid-cols-1">
   <div class="relative z-10  col-start-1 row-start-1 px-4 pt-40 pb-3 bg-gradient-to-t from-black">
-    <p class="text-sm font-medium text-white">{{ article.source.domain }}</p>
-    <h2 class="text-2xl font-extrabold text-white dark:text-Orange-200">{{ article.title }}</h2>
+    <p class="text-sm font-medium text-Aqua-100">{{ article.source.domain }}</p>
+    <h2 class="text-2xl font-extrabold italic bg-gray-200 text-Red-200 bg-clip-content min-w-full">{{ article.title }}</h2>
   </div>
 
   <div  class="col-start-1 row-start-2 px-4">
-    <p class="my-5 text-sm text-gray-500">
+    <p class="my-5 text-sm text-gray-500 italic ">
        <span> {{article.published_date}} </span> <br/>
-      <span *ngIf="article.keywords.length > 0"> Tags: <span *ngFor="let word of article.keywords; let last = last"  class=" text-Aqua-200"> {{last ? word : word+", "}} </span></span>
+      <span *ngIf="article.keywords.length > 0" > Tags: <span *ngFor="let word of article.keywords; let last = last"  class=" text-Green-300"> {{last ? word : word+", "}} </span></span>
     </p>
-    <p class="text-lg font-semibold text-gray-500">
+    <p class="text-lg italic font-semibold text-Aqua-100">
       {{ article.description }}
     </p>
   </div>
 
   <div   class="col-start-1 row-start-3 space-y-3 px-4">
-    <p class="flex items-center text-black text-sm font-medium my-5 mb-8 dark:text-gray-400">      
+    <p class="flex items-center text-black text-base font-medium my-5 mb-8 dark:text-gray-400">      
       {{article.content}}
     </p>
   </div>

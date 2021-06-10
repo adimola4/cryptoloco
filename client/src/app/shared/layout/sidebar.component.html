@@ -9,7 +9,7 @@
         (click)="onSidebarClose()"></div>
     
     <!-- side bar-->
-    <div class="side-nav-bar-menu-container bg-white dark:bg-black-100 flex flex-col absolute inset-y-0" 
+    <div class="side-nav-bar-menu-container  bg-White-100 dark:bg-black-100  border-r-2 border-gray-400 flex flex-col absolute inset-y-0" 
     [ngStyle]="getSideBarStyle(showSideBar )">
         
         <!-- close button -->
@@ -17,13 +17,13 @@
             <a href="" class="flex items-center space-x-2 px-4">                    
                 <span class="text-2xl font-extrabold text-brand-100   font-sans">  CRYPTOLOCO</span>
             </a>            
-             <span class="side-nav-bar-close cursor-pointer dark:text-gray-50 inline-block text-2xl space-x-2 space-y-2 px-4" (click)="onSidebarClose()">X</span>            
+             <span class="side-nav-bar-close cursor-pointer dark:text-gray-50 inline-block text-2xl space-x-2 space-y-2 px-4" (click)="onSidebarClose()">X</span>
         </div>
         <div class="bg-clip-padding   text-lg font-semibold  rounded-none flex flex-col h-auto min-h-full outline-none p-4 pointer-events-auto relative text-left w-full">            
             <div class="flex flex-col mt-5  pointer-events-auto">
                 <a routerLink="/dashboard" class="bg-transparent box-border rounded-xl pointer-events-auto text-left no-underline">
                     <div class="border-solid border-b box-border flex items-center justify-between  py-4 pointer-events-auto text-left
-                    text-gray-600 dark:text-Green-200 hover:text-black-200 hover:bg-gray-50 dark:hover:bg-black-300 dark:hover:text-Green-300"> 
+                    text-gray-600 dark:text-Green-100 hover:text-black-200 hover:bg-gray-50 dark:hover:bg-black-300 dark:hover:text-Green-300"> 
 
                     <span class="">Dashboard</span> 
                     <svg class="w-8 h-8 fill-current text-Orange-200 " xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000">
@@ -48,7 +48,7 @@
                 </a> -->
                 <a routerLink="/about" class="bg-transparent box-border font-normal rounded-xl text-sm pointer-events-auto text-left no-underline">
                   <div class="border-solid border-b box-border flex items-center justify-between font-normal text-sm py-4 pointer-events-auto text-left
-                  text-gray-600 dark:text-Green-200 hover:text-black-200 hover:bg-gray-50 dark:hover:bg-black-300 dark:hover:text-Green-300">
+                  text-gray-600 dark:text-Green-100 hover:text-black-200 hover:bg-gray-50 dark:hover:bg-black-300 dark:hover:text-Green-300">
                     <span class=" text-lg   font-semibold">About</span>
                   </div>
                 </a>

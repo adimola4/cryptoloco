@@ -36,7 +36,6 @@ Source.create_or_find_by!(
     img_url: "",
     type: "News",
    )  
-   Ivan on Tech Youtube Channel
 Source.create_or_find_by!(
     Domain:'Ivan on Tech',
     title:'Ivan on Tech Youtube Channel',

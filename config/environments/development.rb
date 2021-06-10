@@ -55,6 +55,8 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
   config.eager_load = true
+  config.allowed_cors_origins = "*"
+
 
 
   # Raises error for missing translations.
