@@ -10,11 +10,11 @@
   "version": "0.1.0",
   "engines": {
     "node": "^12.13.1",
-    "yarn": "^1.22.4"
+    "npm": "^6.12.1"
   },
   "scripts": {
-    "build": "yarn --cwd client install && yarn --cwd client build",
+    "build": "npm --cwd client install && npm --cwd client build",
     "deploy": "cp -a client/dist/. public/",
-    "heroku-postbuild": "yarn build && yarn deploy"
+    "heroku-postbuild": "npm build && npm deploy"
   }
 }
