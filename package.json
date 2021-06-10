@@ -13,8 +13,8 @@
     "npm": "^6.12.1"
   },
   "scripts": {
-   
-    "deploy": "cp -a client/dist/client. public/",
-    "heroku-postbuild": "npm run build && npm run deploy"
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",   
+    "heroku-postbuild": "npm run install-client && npm run build"
   }
 }
