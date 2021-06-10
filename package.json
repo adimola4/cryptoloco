@@ -15,6 +15,6 @@
   "scripts": {
     "build": "npm --cwd client install && npm --cwd client build",
     "deploy": "cp -a client/dist/. public/",
-    "heroku-postbuild": "npm build && npm deploy"
+    "heroku-postbuild": "npm run build && npm run deploy"
   }
 }
