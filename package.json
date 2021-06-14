@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "cd client && npm run build",
-    "install-client": "cd client && ng build --prod",   
+    "install-client": "cd client && npx install @angular/cli && ng build --prod ",   
     "heroku-postbuild": "npm run install-client && npm run build"
   }
 }
