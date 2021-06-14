@@ -15,8 +15,8 @@
     "npm": "^6.12.1"
   },
   "scripts": {
-    "build": "cd client && npm run build",
-    "install-client": "cd client && npm run build ",
+    "build": "npm run build",
+    "install-client": "cd client && npm run bulid",
     "heroku-postbuild": "npm run install-client && npm run build"
   }
 }
