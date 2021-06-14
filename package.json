@@ -18,7 +18,8 @@
     "build": "",
     "install-client": "cd client && npm run bulid",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "rails  s  && npm run start --prefix client"
+    "start": "rails  s  && npm run start --prefix client",
+    "start-client": "cd client && ng serve --port 4201"
 
   }
 }
