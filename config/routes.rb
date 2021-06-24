@@ -23,18 +23,14 @@ Rails.application.routes.draw do
       get "/feed", to: "feed#index"
       get "/tweets", to: "tweets#index"
       get "/tweets/:twitter_user_name", to: "tweets#new"
-      
-
-
-
-
-
-      # resourcess :sourcess
-      # resourcess :currencies
-      # resourcess :categories
-      # resourcess :articles
     end
   end
+
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+   !request.xhr? && request.format.html?
+  end
+
+  root to: "application#fallback_index_html"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

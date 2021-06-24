@@ -141,7 +141,6 @@ class ArticleFetcher
         
     end
     return true
-
   end
 
   def get_data_from_meta(meta)

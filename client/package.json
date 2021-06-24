@@ -2,12 +2,12 @@
   "name": "client",
   "version": "0.0.0",
   "repository": {
-    "url": "https://github.com/adimola4/cryptoloco.git"
+    "url": "https://github.com/adimola4/cryptoloco-app.git"
   },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4201",
-    "build": "ng build --prod",
+    "build": "ng build  --aot  --prod",
     "test": "ng test",
     "lint": "ng lint",
     "karma": "karma",
@@ -15,6 +15,7 @@
     "reinstall": "npm cache clean && npm install",
     "prettier": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts,.html,.scss}\"",
     "prettier-format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts,.html,.scss}\"",
+    "heroku-postbuild": "npm run build",
     "e2e": "ng e2e"
   },
   "private": true,
