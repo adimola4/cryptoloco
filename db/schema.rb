@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_05_140641) do
+ActiveRecord::Schema.define(version: 2021_06_25_153143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 2021_06_05_140641) do
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "content"
     t.bigint "source_id", null: false
     t.date "published_date"
     t.string "keywords", default: [], array: true
     t.string "type_of_content"
     t.string "image_url"
+    t.string "content"
     t.index ["source_id"], name: "index_articles_on_source_id"
   end
 
@@ -91,8 +91,6 @@ ActiveRecord::Schema.define(version: 2021_06_05_140641) do
     t.string "img_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "{:index=>true, :foreign_key=>true}_id"
-    t.index ["{:index=>true, :foreign_key=>true}_id"], name: "index_sources_on_{:index=>true, :foreign_key=>true}_id"
   end
 
   create_table "twitter_accounts", force: :cascade do |t|
