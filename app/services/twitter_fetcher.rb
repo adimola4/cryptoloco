@@ -10,7 +10,6 @@ class TwitterFetcher
             config.access_token_secret = ENV["TWITTER_CONFIG_ACCESS_TOKEN_SECRET"].to_s
         end
         @accounts = TwitterAccount.all
-        p @accounts
     end
 
     def run
