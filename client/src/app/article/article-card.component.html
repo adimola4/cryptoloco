@@ -1,13 +1,12 @@
-<div  @enterExitLeft class="grid  grid-cols-10 gap-4 items-center place-items-center py-3 px-3 hover:shadow-lg">
-        <div class="col-start-1 col-span-2">
-          <span class="font-bold text-Aqua-100  text-xs">{{article.published_date}}</span>
+<div  @enterExitLeft class="grid grid-cols-6  sm:grid-cols-12 gap-4 items-center place-items-center py-3 px-3 hover:shadow-lg">
+        <div class="hidden sm:col-start-1 sm:col-span-1">
         </div>
-        <div class="col-start-3 col-span-8 p-1 w-full">
+        <div class="col-start-1 col-span-4 sm:col-start-2 sm:col-span-8 p-1 w-full">
           <div class="w-full">
           <p  (click)="articleLinkClick()" class=" text-gray-700 dark:text-gray-400 italic font-bold dark:hover:text-Orange-100 cursor-pointer hover:underline text-sm">{{article.title}}
           </p>
           <a href="{{article.source.website_url}}" class="text-xs cursor-pointer text-Orange-200 no-underline font-semibold">
-            
+            <span class="font-bold text-Aqua-100  text-xs">{{article.published_date}}</span>  
             <div *ngIf="article_type " class="inline-block">
               <svg viewBox="0 0 24 24" class="h-6 w-6 inline-block fill-current  hover:text-Orange-100 rounded-md  -mr-2">
                 <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
@@ -15,16 +14,17 @@
               </svg>  
             </div>
             <div *ngIf="!article_type" class="inline-block">
+          
               <svg viewBox="0 0 24 24" class="h-6 w-6 inline-block  rounded-full "><circle cx="12" cy="12" r="7" fill="#F3E8FF"></circle><path d="M14.52 11.136a1 1 0 010 1.728l-3.016 1.759A1 1 0 0110 13.759v-3.518a1 1 0 011.504-.864l3.015 1.76z" fill="#C084FC"></path></svg>            </div>      
-           {{ article.source.domain }}
+           {{ article.source.domain }}           
         </a>
           
           </div>
-          <div class="flex flex-wrap">    
+          <div class="hidden sm:flex flex-wrap">    
             <button *ngFor="let word of article.keywords" class="rounded-full bg-white  text-Aqua-200 dark:bg-black-300 dark:hover:bg-Aqua-200 hover:bg-Aqua-200 hover:text-black-100 duration-300 text-xs font-bold m-0 sm:m-1 px-2 md:px-4 py-0  sm:py-1 opacity-90 hover:opacity-100"> {{ word }} </button>
           </div>
         </div>
-        <!-- <div class="col-start-11 auto-cols-min col-span-2  justify-center inline-block text-center pt-2 pb-1 w-full">
-          <img src="{{source.img_url}}" class="inline-block cursor-pointer h-10 w-10  mb-1 rounded-full " />
-        </div> -->
+        <div class="col-start-5 col-span-2 sm:col-start-10 sm:col-span-3  justify-center inline-block text-center w-full">
+          <img src="{{article.image_url}}" class="inline-block cursor-pointer  " />
+        </div>
 </div>

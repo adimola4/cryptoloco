@@ -2,10 +2,27 @@
   <div (mode)="getMode($event)" class="bg-white dark:bg-black-400 relative sm:h-screen md:flex">
     
     <!-- mobile menu bar -->
-    <div class="bg-white dark:bg-black-500  text-Gray-200  dark:text-gray-100 flex justify-center md:hidden">
+    <div class="bg-white dark:bg-black-500  text-Gray-200  dark:text-gray-100 flex justify-between md:hidden">
+      <button (click)="openSidebar()" 
+              class="mobile-menu-button flex  text-gray-400 
+                    rounded-full  left-0 
+                     align-middle z-40  p-4 focus:outline-none focus:bg-gray-700 ">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+     </button>
       <!-- logo -->
-      <a href="#" class="block p-4 text-brand-100  font-bold font-sans"><span class="">CRYPTOLOCO</span></a>
+      <a href="#" class="w-full p-4 text-brand-100  font-bold font-sans"><span class="">CRYPTOLOCO</span></a>
     </div >
+    <button (click)="openSidebar()" 
+              class="mobile-menu-button hidden sm:flex absolute  text-gray-400 border-2 border-gray-400
+                    rounded-full  top-1/2 -translate-x-1/2 transform
+                     align-middle z-40  p-4 focus:outline-none focus:bg-gray-700 ">
+              <div class="h-5 w-5"></div>
+              <svg class="h-5 w-5 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+    </button>
    
     <div class="flex w-full overflow-scroll no-scrollbar no-scrollbar::-webkit-scrollbar  bg-white dark:bg-black-500   text-gray-700  dark:text-gray-100 md:hidden">
       <app-currency class="" (click)=showCurrency(currency) *ngFor="let currency of currencies" [currency]="currency" ></app-currency>
@@ -24,12 +41,7 @@
   </div>
   <!-- <app-dashboard  >
   </app-dashboard> -->
-  <button (click)="openSidebar()" class="mobile-menu-button flex border-gray-400 text-gray-400 justify-between absolute top-1/2 w-32 rounded-full transform -translate-x-1/2  border-2  align-middle z-40  p-4 focus:outline-none focus:bg-gray-700 focus:">
-    <div class="w-5"></div>
-    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  </button>
+ 
 </div>
 
  <!-- logo -->

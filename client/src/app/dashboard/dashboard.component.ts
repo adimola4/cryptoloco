@@ -95,6 +95,10 @@ export class DashboardComponent implements OnInit, OnChanges {
 	shownCurrency: any;
 	componentRef: any;
 	topCurrencies: Currency[];
+	get isMobile(): any{
+		return window.innerWidth <= 420 
+	}
+
 	// allReaders: Reader[];
 	// mostPopularBook: Book;
 	constructor(

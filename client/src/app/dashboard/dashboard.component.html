@@ -1,12 +1,11 @@
 <div class="relative h-screen w-screen md:flex">
   <!-- content -->
+
     <div class="flex-1 grid grid:rows-2 h-full w-full sm:grid-cols-2 sm:gap-2 p-1.5 px-2 sm:pl-0 text-2xl dark:bg-black-300 font-bold text-black dark:text-green-500  sm:border-r-2 border-gray-400 ">
-
-
       <div class=" sm:border-r-1 no-scrollbar no-scrollbar::-webkit-scrollbar overflow-scroll  w-full  sm:border-r-2 border-gray-400">
         <div class="flex flex-col sm:flex-row sm:flex  sticky   -top-2 z-10 justify-between  border-b-2 border-gray-400 -mb-px -mt-0.5 bg-white dark:bg-black-300">
-            <search-input (searchEvent)=searchChange($event) class="border-b-2 border-gray-400 sm:border-none" ></search-input>
-            <div class="flex flex-row mr-2 ">
+            <search-input (searchEvent)=searchChange($event) class="border-b-1 border-gray-400 sm:border-none" ></search-input>
+            <div class="hidden sm:flex flex-row mr-2 ">
               <span class=" sm:border-Gray-200 sm:border-l-2 pl-2 align-middle text-center items-center flex text-base font-semibold  sm:font-medium  text-gray-700 dark:text-gray-400">Filter: </span>
               <button (click)="searchChange('News')"  class="flex items-center w-full py-2.5 sm:py-0 rounded transition duration-200 hover:text-black  dark:hover:text-white">
                   <!-- <svg viewBox="0 0 24 24" class="h-6 w-10 inline-block mb-1 rounded-xl bg-gradient-to-br from-blue-800 to-rose-500 ring-offset-4"><path d="M8 9a1 1 0 011-1h8a1 1 0 011 1v7.5a1.5 1.5 0 01-1.5 1.5h-7A1.5 1.5 0 018 16.5V9z" fill="#6EE7B7"></path><path d="M15 7a1 1 0 00-1-1H7a1 1 0 00-1 1v9.5A1.5 1.5 0 007.5 18H16v-.085a1.5 1.5 0 01-1-1.415V7z" fill="#ECFDF5"></path><path fill="#A7F3D0" d="M8 8h5v4H8zM8 14h5v2H8z"></path></svg>             -->
@@ -18,19 +17,30 @@
               </button>
             </div>
         </div>
-        <ng-container  *ngIf="!loading_articles;else loadingfeed" class="p-0 w-full">                
-                <article-card (click)=articleClick(article)
-                  *ngFor="let article of articles$ | async"
-                  [article]="article"
-                  routerLinkActive="active"                                 
-                  (articleLinkClick)="articleClick($event)"
-                  class="article-card dark:bg-black-300 opacity-10">
-                </article-card>                    
+        <!-- <ng-container  *ngIf="!isMobile;else mobileContainer" >        -->
+          <ng-container  *ngIf="!loading_articles;else loadingfeed" class="p-0 w-full">       
+              <article-card (click)=articleClick(article)
+
+                *ngFor="let article of articles$ | async"
+                [article]="article"
+                routerLinkActive="active"                                 
+                (articleLinkClick)="articleClick($event)"
+                class="flex article-card dark:bg-black-300 ">
+              </article-card>                                   
             <div *ngIf="!articles"> No articles found to your search</div>
-        </ng-container>
-        <ng-template #loadingfeed class="p-0 w-full ">
-          <spinner text="loading articles..."></spinner>
+          </ng-container>
+        <!-- </ng-container> -->
+        
+        <!-- <ng-template #mobileContainer class="p-0 w-full ">
+         <h1>new mobile </h1>
         </ng-template>
+         -->
+        
+        <ng-template #loadingfeed class="p-0 w-full ">
+          <spinner  text="loading articles..."></spinner>
+        </ng-template>
+
+
     </div>
       <div class=" hidden sm:block no-scrollbar no-scrollbar::-webkit-scrollbar overflow-scroll bg-transparent w-full m-0">
           <ng-container  *ngIf="contentType==='Article'">
@@ -56,6 +66,7 @@
       </app-currency>
     </div>  
     </div>
+
 
     
 </div>
