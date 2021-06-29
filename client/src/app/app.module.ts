@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { APP_BASE_HREF } from "@angular/common";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { CommonModule } from '@angular/common';
+
 // import * as NgxChartsModule  from '@swimlane/ngx-charts'
 
 import { ArticlesFilterPipe, ReplacePipe, SortByPipe } from "./pipes";
@@ -75,6 +77,7 @@ import { TopCurrencyChartComponent } from "./chart/top-currency-chart/top-curren
 		BrowserModule,
 		BrowserAnimationsModule,
 		AppRoutingModule,
+		CommonModule,
 		FormsModule,
 		HttpClientModule,
 		NgxChartsModule
