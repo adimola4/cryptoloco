@@ -33,18 +33,15 @@ export class SortByPipe implements PipeTransform {
 			}
 		} else {
 			if (order === 'asc') {
-				// console.log(Array.from(value));
 				const r = value.sort((x: any, y: any) => {
 					const f = this.compar(x[prop], y[prop]);
 					return f;
 				});
-				// console.log(r);
 				return r;
 			} else {
 				const r = value
 					.sort((x: any, y: any) => this.compar(x[prop], y[prop]))
 					.reverse();
-				// console.log(r);
 				return r;
 			}
 		}

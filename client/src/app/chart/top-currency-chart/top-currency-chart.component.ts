@@ -41,13 +41,11 @@ export class TopCurrencyChartComponent implements OnInit {
 				this.dataService
 					.getChartByCoin(currency.api_id.toString(), 1)
 					.subscribe(d => {
-						console.log('get chart from top:::: ', currency.title);
-						console.log(d);
+					
 						let _prices = {};
 						const _market_caps = {};
 						const _total_volumes = {};
 						for (const key of Object.keys(d)) {
-							console.log(key);
 							const obj = {
 								name: currency.title.toUpperCase(),
 								series: [

@@ -59,16 +59,13 @@ export class AppComponent implements OnInit, AfterViewChecked {
 	ngOnInit(): void {
 		this.sourcesOBS$ = this.dataService.sources$;
 		this.currenciesOBS$ = this.dataService.currencies$;
-		//  this.sourcesOBS$.subscribe((data:any)=>{
-		//         console.log("from app:",data);
-		//  });
+	
 		forkJoin([this.sourcesOBS$, this.currenciesOBS$])
 			.pipe(take(1))
 			.subscribe(result => {
 				this.allSources = result[0];
 
 				this.currencies = result[1];
-				console.log(this.currencies);
 			});
 		
 	}
@@ -83,7 +80,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
 			this.metaService.addTags([{ name: '' }]);
 		} else {
 		}
-		console.log('change theme ', this.setModeTheme);
 	}
 
 	showCurrency(currency: Currency) {

@@ -24,7 +24,6 @@ export class FeedComponent implements OnInit {
 	ngOnInit() {}
 
 	searchChange(term: string) {
-		// console.log("aaaa", term);
 		this.searchTerm = term;
 	}
 }

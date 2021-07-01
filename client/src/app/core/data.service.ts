@@ -72,7 +72,7 @@ export class DataService {
 			.pipe(
 				tap(),
 				shareReplay({ bufferSize: 1, refCount: true }),
-				tap(() => console.log('after sharing'))
+				tap()
 			);
 	}
 
@@ -81,7 +81,6 @@ export class DataService {
 		if (err.error instanceof ErrorEvent) {
 			errorMessage = `An error occurred: ${err.error.message}`;
 		} else if (err instanceof HttpErrorResponse) {
-			console.log(err);
 			errorMessage = `'${err.status} ${err.statusText}' when accessing '${err.url}'`;
 		} else {
 			errorMessage = err;
@@ -124,9 +123,9 @@ export class DataService {
 		return this.http
 			.get<Currency[]>(this.API_URL + 'currencies', this.httpOptions)
 			.pipe(
-				tap(console.log),
+				tap(),
 				shareReplay(1),
-				tap(() => console.log('after sharing'))
+				tap()
 			);
 	}
 
@@ -136,34 +135,7 @@ export class DataService {
 			.pipe(
 				tap(console.log),
 				shareReplay(1),
-				tap(() => console.log('after sharing'))
-				// catchError(this.handleError),
-				//   map((data: {coins:any[]}) => {
-				//     let coins:Currency[]=[];
-				//     data.coins.forEach((coin: { item:{ id: number; symbol: string; name: string; market_cap_rank: number; price_btc: number; small: string; }}) => {
-
-				//     // this.http.get<any>()
-				//     let currency : Currency= {
-				//       api_id: coin.item.id,
-				//       code: coin.item.symbol,
-				//       title: coin.item.name,
-				//       rank: coin.item.market_cap_rank,
-				//       market_cap_usd: "",
-				//       description: "",
-				//       price_usd: coin.item.price_btc ,
-				//       v24: 0,
-				//       p24: 0,
-				//       p1h: 0,
-				//       p7d: 0,
-				//       img_url: coin.item.small,
-				//       keywords:[],
-				//       links: []
-				//     }
-				//     coins.push(currency)
-				//   })
-				//   return coins;
-				//   }
-				//  )
+				tap()
 			);
 	}
 
@@ -173,7 +145,7 @@ export class DataService {
 			.pipe(
 				tap(),
 				shareReplay({ bufferSize: 1, refCount: true }),
-				tap(() => console.log('after sharing'))
+				tap()
 			);
 	}
 
@@ -186,7 +158,7 @@ export class DataService {
 			.pipe(
 				tap(),
 				shareReplay({ bufferSize: 1, refCount: true }),
-				tap(() => console.log('after sharing'))
+				tap()
 			);
 	}
 
@@ -197,7 +169,7 @@ export class DataService {
 				.pipe(
 					tap(),
 					shareReplay({ bufferSize: 1, refCount: true }),
-					tap(() => console.log('after sharing'))
+					tap()
 				);
 		} else {
 			return this.http
@@ -205,7 +177,7 @@ export class DataService {
 				.pipe(
 					tap(),
 					shareReplay({ bufferSize: 1, refCount: true }),
-					tap(() => console.log('after sharing'))
+					tap()
 				);
 		}
 	}

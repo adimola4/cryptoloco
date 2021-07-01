@@ -5,19 +5,12 @@ import { Article } from '../models';
 
 @Pipe({ name: 'SearchFilter' })
 export class ArticlesFilterPipe implements PipeTransform {
-	/**
-	 * Transform
-	 *
-	 * @param {Observable< Article[]>} articles
-	 * @param {string} searchText
-	 * @returns {Observable< Article[]>}
-	 */
+	
 	transform(
 		articles: Observable<Article[]>,
 		searchTerm: string
 	): Observable<Article[]> {
-		// console.log(articles);
-		// let Articles = of(articles)
+		
 		if (!articles) {
 			return of();
 		}
@@ -34,7 +27,6 @@ export class ArticlesFilterPipe implements PipeTransform {
 					);
 				})
 			);
-			// articles.filter(article => { return article.source.type === "News"})
 		} else if (searchTerm === 'Media') {
 			return articles.pipe(
 				tap((data: Article[]) => {

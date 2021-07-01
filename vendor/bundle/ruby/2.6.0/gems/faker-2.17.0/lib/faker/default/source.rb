@@ -25,20 +25,7 @@ module Faker
         fetch("source.hello_world.#{lang}")
       end
 
-      ##
-      # Produces source code for printing a string in a given language.
-      #
-      # @param str [String] The string to print
-      # @param lang [Symbol] The programming language to use
-      # @return [String]
-      #
-      # @example
-      #   Faker::Source.print #=> "puts 'faker_string_to_print'"
-      # @example
-      #   Faker::Source.print(str: 'foo bar', lang: :javascript)
-      #     #=> "console.log('foo bar');"
-      #
-      # @faker.version 1.9.0
+    
       def print(legacy_str = NOT_GIVEN, legacy_lang = NOT_GIVEN, str: 'some string', lang: :ruby)
         warn_for_deprecated_arguments do |keywords|
           keywords << :str if legacy_str != NOT_GIVEN

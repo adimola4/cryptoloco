@@ -17,20 +17,16 @@ export class CacheInterceptor implements HttpInterceptor {
 		request: HttpRequest<any>,
 		next: HttpHandler
 	): Observable<HttpEvent<any>> {
-		console.log(request.method);
 
 		if (request.method !== 'GET') {
 			return next.handle(request);
 		}
-		console.log('caching working');
 		const cachedResponse = this.cache.get(request);
 
 		if (cachedResponse) {
 			return of(cachedResponse.clone());
 		} else {
 			return next.handle(request).pipe((data): any => {
-				console.log(JSON.stringify(data));
-				// this.cache.set(request, data.clone())
 			});
 		}
 	}

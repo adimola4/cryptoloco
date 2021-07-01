@@ -47,9 +47,7 @@ export class ChartCurrencyComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		// console.log(this.currency.api_id);
 		if (this.justLine) {
-			console.log('justline');
 			this.showLabels =
 				this.showXAxisLabel =
 				this.showYAxisLabel =
@@ -70,7 +68,6 @@ export class ChartCurrencyComponent implements OnInit {
 			let _market_caps = {};
 			let _total_volumes = {};
 			for (const key of Object.keys(a)) {
-				console.log(key);
 				const obj = {
 					name: 'Price per USD',
 					series: [
@@ -99,7 +96,6 @@ export class ChartCurrencyComponent implements OnInit {
 						date: _fulldate
 					});
 				}
-				console.log(obj.series.splice(0, 1));
 
 				if (key === 'prices') {
 					_prices = obj;
@@ -111,13 +107,11 @@ export class ChartCurrencyComponent implements OnInit {
 			}
 			this.chartData = [_prices];
 			this.chartData = [...this.chartData];
-			console.log(this.chartData);
 		});
 	}
 
 	update(): void {}
 	onResize(event: any) {
-		// this.view = [event.target.innerWidth / 1.35, 400];
 	}
 
 	generateDate(): string[] {

@@ -64,7 +64,6 @@ export class ArticleComponent implements OnInit {
 			this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
 				this.article.content
 			);
-			console.log('safeurl: ', this.safeUrl);
 		}
 	}
 

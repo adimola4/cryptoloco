@@ -18,11 +18,10 @@ export class DarkModeButtonComponent implements OnInit {
 			document.getElementsByTagName('html')[0].classList.add('dark');
 			this.dark = true;
 		} else {
-			console.log(document.documentElement);
 			document.getElementsByTagName('html')[0].classList.remove('dark');
 			this.dark = false;
 		}
-		
+
 	}
 
 	onChangeTheme() {

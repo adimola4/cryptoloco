@@ -43,7 +43,6 @@ export class DefaultViewContentContainerComponent implements OnInit {
 		this.tweets$.subscribe(() => (this.loading_tweets = false));
 	}
 	public compar(x: any, y: any): number {
-		console.log(x, y);
 		if (
 			isNaN(parseFloat(x)) ||
 			!isFinite(x) ||
@@ -64,7 +63,6 @@ export class DefaultViewContentContainerComponent implements OnInit {
 		this.showError = '';
 		this.dataService.newTwitterAccount(this.twitter_user_name).subscribe(
 			(data: Tweet[]) => {
-				console.log(data);
 				data.map(t => {
 					// if(this.tweets.filter())
 					if (
@@ -82,7 +80,6 @@ export class DefaultViewContentContainerComponent implements OnInit {
 				this.showError = err.error[0].msg;
 			},
 			() => {
-				console.log('add twitter...');
 				this.showError = '';
 				this.showSuccess = `Success to add ${this.twitter_user_name}!`;
 				this.twitter_user_name = '';

@@ -115,7 +115,6 @@ export class DashboardComponent implements OnInit, OnChanges {
 	ngOnChanges(changes: SimpleChanges): void {}
 
 	ngOnInit() {
-		// console.log(document.getElementsByTagName('html')[0].className)
 		if (
 			localStorage.theme === 'dark' ||
 			(!('theme' in localStorage) &&
@@ -124,7 +123,6 @@ export class DashboardComponent implements OnInit, OnChanges {
 			document.getElementsByTagName('html')[0].classList.add('dark');
 			this.dark = true;
 		} else {
-			console.log(document.documentElement);
 			document.getElementsByTagName('html')[0].classList.remove('dark');
 			this.dark = false;
 		}
@@ -142,8 +140,8 @@ export class DashboardComponent implements OnInit, OnChanges {
 					this.articles.push(a);
 				});
 			},
-			(err: any) => console.log(err),
-			() => console.log('getting all articles.')
+			(err: any) => console.log(err)
+		
 		);
 		this.route.params.subscribe((params: Params) => {
 			this.article_title = params.articleTitle;
@@ -158,17 +156,13 @@ export class DashboardComponent implements OnInit, OnChanges {
 				)
 				.subscribe(result => (this.shownArticle = result));
 		});
-		// this.curreancies= this.route.snapshot.data['currencies'];
-		//  console.log("adadadada:",JSON.stringify(currenciesFromResolvar.length));
-		// = currenciesFromResolvar;
+		
 		this.dataService.getTopCurrency().subscribe(data => {
-			console.log('top top top');
-			console.log(data);
+		
 			this.topCurrencies = data;
 		});
 
 		this.userDeviceWidth = window.innerWidth;
-		// console.log(this.currencies);
 	}
 	ngAfterViewInit(): void {
 		this.loading = this.loadingService.loading$
@@ -181,7 +175,6 @@ export class DashboardComponent implements OnInit, OnChanges {
 		this.router.navigate([this.route]);
 	}
 	articleClick(event: any) {
-		console.log(event);
 
 		this.shownArticle = event;
 		this.contentType = 'Article';
@@ -199,7 +192,6 @@ export class DashboardComponent implements OnInit, OnChanges {
 		return a;
 	}
 	searchChange(term: string) {
-		// console.log("aaaa", term);
 		this.searchTerm = term;
 
 		if (term === 'News') {
@@ -246,7 +238,6 @@ export class DashboardComponent implements OnInit, OnChanges {
 					});
 				}),
 				filter((articless: Article[]) => {
-					console.log(articless);
 					return articless && articless.length > 0;
 				})
 			)
@@ -259,7 +250,6 @@ export class DashboardComponent implements OnInit, OnChanges {
 		this.router.navigate(['../'], { relativeTo: this.route });
 	}
 	createCurrencyComponent(currency: Currency) {
-		console.log('currency', this.entry);
 		if (this.entry !== undefined) {
 			this.entry.clear();
 			const factory = this.resolver.resolveComponentFactory(
@@ -272,18 +262,5 @@ export class DashboardComponent implements OnInit, OnChanges {
 	destroyComponent() {
 		this.componentRef.destroy();
 	}
-	// deleteBook(bookID: number): void {
-	//   this.dataService.deleteBook(bookID)
-	//     .subscribe(
-	//       (data: void) => {
-	//         let index: number = this.allBooks.findIndex(book => book.bookID === bookID);
-	//         this.allBooks.splice(index, 1);
-	//       },
-	//       (err: any) => console.log(err)
-	//     );
-	// }
-
-	// deleteReader(readerID: number): void {
-	//   console.warn(`Delete reader not yet implemented (readerID: ${readerID}).`);
-	// }
+	
 }

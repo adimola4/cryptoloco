@@ -13,8 +13,6 @@ export class ReplacePipe implements PipeTransform {
 		}
 		const r = Number(value);
 
-		// let r = value.toString().replace(new RegExp(strToReplace, 'g'), replacementStr)
-		console.log(r);
 		return r;
 	}
 }

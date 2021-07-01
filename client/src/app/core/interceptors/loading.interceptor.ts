@@ -20,7 +20,6 @@ export class LoadingInterceptor implements HttpInterceptor {
 		next: HttpHandler
 	): Observable<HttpEvent<unknown>> {
 		if (this.activeRequests === 0) {
-			console.log('loading.......');
 			this.loadingScreenService.startLoading();
 		}
 		this.activeRequests++;
@@ -29,7 +28,6 @@ export class LoadingInterceptor implements HttpInterceptor {
 			finalize(() => {
 				this.activeRequests--;
 				if (this.activeRequests === 0) {
-					console.log('done1');
 					this.loadingScreenService.stopLoading();
 				}
 			})

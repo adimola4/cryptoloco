@@ -22,11 +22,9 @@ export class ErrorInterceptor implements HttpInterceptor {
 			catchError(err => {
 				switch (err.status) {
 					case 404:
-						console.log('404:', err.code);
 
 						return throwError(err);
 					case 500:
-						console.log('500:', err.code);
 
 						return throwError(err);
 					default:
