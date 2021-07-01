@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TweetComponent } from "./tweet.component";
+import { TweetComponent } from './tweet.component';
 
-describe("TweetComponent", () => {
+describe('TweetComponent', () => {
 	let component: TweetComponent;
 	let fixture: ComponentFixture<TweetComponent>;
 
@@ -18,7 +18,7 @@ describe("TweetComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 });

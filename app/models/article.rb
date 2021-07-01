@@ -2,7 +2,7 @@
 
 class Article < ApplicationRecord
   require 'net/http'
-  
+
   belongs_to :source
 
   validates :title, presence: { base: "Title can't be blank!" }
@@ -11,14 +11,7 @@ class Article < ApplicationRecord
   validates :original_url, length: { maximum: 255 }
   validates :source_id, presence: true
 
-
-
-  def get_full_html_content()
-    if full_html_content.blank? || full_html_content == "moved here"
-      ArticleFetcher.new(self).run
-    else
-      p full_html_content
-    end
+  def get_full_html_content
+    ArticleFetcher.new(self).run if full_html_content.blank? || full_html_content == "moved here"
   end
-
 end

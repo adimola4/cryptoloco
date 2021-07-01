@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
 	HttpEvent,
 	HttpInterceptor,
 	HttpHandler,
 	HttpRequest
-} from "@angular/common/http";
-import { Observable } from "rxjs";
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class HttpHeaderInterceptor implements HttpInterceptor {
@@ -13,8 +13,8 @@ export class HttpHeaderInterceptor implements HttpInterceptor {
 		req: HttpRequest<any>,
 		next: HttpHandler
 	): Observable<HttpEvent<any>> {
-		let jsonReq: HttpRequest<any> = req.clone({
-			setHeaders: { "Content-Type": "application/json" }
+		const jsonReq: HttpRequest<any> = req.clone({
+			setHeaders: { 'Content-Type': 'application/json' }
 		});
 
 		return next.handle(jsonReq);

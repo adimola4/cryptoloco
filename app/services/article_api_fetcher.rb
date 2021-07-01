@@ -1,18 +1,16 @@
 # frozen_string_literal: true
 
 class ArticleApiFetcher
-    require "httparty"
-  
-    def initialize(article_url)
-      @article_url = article_url
-      @article_data = {
-        "title" => "",
-        "description" => "",
-        "content" => "",
-      }
-    end
-    def run
+  require "httparty"
 
+  def initialize(article_url)
+    @article_url = article_url
+    @article_data = {
+      "title" => "",
+      "description" => "",
+      "content" => ""
+    }
+  end
 
-    end
+  def run; end
 end

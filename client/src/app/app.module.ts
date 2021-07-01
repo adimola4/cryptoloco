@@ -1,18 +1,19 @@
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { APP_BASE_HREF } from "@angular/common";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { APP_BASE_HREF } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CommonModule } from '@angular/common';
+import { TabsModule } from './tabs/tabs.module';
 
 // import * as NgxChartsModule  from '@swimlane/ngx-charts'
 
-import { ArticlesFilterPipe, ReplacePipe, SortByPipe } from "./pipes";
+import { ArticlesFilterPipe, ReplacePipe, SortByPipe } from './pipes';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { ArticleResolver } from "./core/article-resolver.service";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ArticleResolver } from './core/article-resolver.service';
 import {
 	SidebarComponent,
 	HeaderComponent,
@@ -20,30 +21,31 @@ import {
 	MobileBottomNavComponent,
 	DarkModeButtonComponent,
 	SpinnerComponent
-} from "./shared";
+} from './shared';
 
-import { DashboardComponent, ContentContainerComponent } from "./dashboard";
-import { AboutComponent } from "./about/about.component";
+import { DashboardComponent, ContentContainerComponent } from './dashboard';
+import { AboutComponent } from './about/about.component';
 // import { CoreModule } from './core/';
 import {
 	ErrorInterceptor,
 	HttpHeaderInterceptor,
 	CacheInterceptor
-} from "./core/interceptors";
+} from './core/interceptors';
 
-import { FormsModule } from "@angular/forms";
-import { SourceComponent } from "./source/source.component";
-import { ArticleComponent, ArticleCardComponent } from "./article";
-import { FeedComponent } from "./feed/feed.component";
-import { CurrencyComponent, CurrencyDetailsComponent } from "./currency";
-import { DefaultViewContentContainerComponent } from "./dashboard/default-view-content-container/default-view-content-container.component";
-import { MobileArticleComponent } from "./article/mobile-article/mobile-article.component";
-import { CurrencyResolver, SideBarService } from "./core";
-import { TweetComponent } from "./tweet/tweet.component";
-import { LoadingInterceptor } from "./core/interceptors/loading.interceptor";
-import { ChartCurrencyComponent } from "./chart/chart-currency.component";
-import { HolderDirective } from "./core/holder.directive";
-import { TopCurrencyChartComponent } from "./chart/top-currency-chart/top-currency-chart.component";
+import { FormsModule } from '@angular/forms';
+import { SourceComponent } from './source/source.component';
+import { ArticleComponent, ArticleCardComponent } from './article';
+import { FeedComponent } from './feed/feed.component';
+import { CurrencyComponent, CurrencyDetailsComponent } from './currency';
+import { DefaultViewContentContainerComponent } from './dashboard/default-view-content-container/default-view-content-container.component';
+import { MobileArticleComponent } from './article/mobile-article/mobile-article.component';
+import { CurrencyResolver, SideBarService } from './core';
+import { TweetComponent } from './tweet/tweet.component';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { ChartCurrencyComponent } from './chart/chart-currency.component';
+import { HolderDirective } from './core/holder.directive';
+import { TopCurrencyChartComponent } from './chart/top-currency-chart/top-currency-chart.component';
+import { ChartListComponent } from './chart/chart-list/chart-list.component';
 
 @NgModule({
 	declarations: [
@@ -71,7 +73,8 @@ import { TopCurrencyChartComponent } from "./chart/top-currency-chart/top-curren
 		ChartCurrencyComponent,
 		CurrencyDetailsComponent,
 		HolderDirective,
-		TopCurrencyChartComponent
+		TopCurrencyChartComponent,
+		ChartListComponent
 	],
 	imports: [
 		BrowserModule,
@@ -80,7 +83,8 @@ import { TopCurrencyChartComponent } from "./chart/top-currency-chart/top-curren
 		CommonModule,
 		FormsModule,
 		HttpClientModule,
-		NgxChartsModule
+		NgxChartsModule,
+		TabsModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
@@ -91,7 +95,7 @@ import { TopCurrencyChartComponent } from "./chart/top-currency-chart/top-curren
 			multi: true
 		},
 		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-		{ provide: APP_BASE_HREF, useValue: "" },
+		{ provide: APP_BASE_HREF, useValue: '' },
 		ArticleResolver,
 		CurrencyResolver
 	],

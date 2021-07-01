@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefaultViewContentContainerComponent } from "./default-view-content-container.component";
+import { DefaultViewContentContainerComponent } from './default-view-content-container.component';
 
-describe("DefaultViewContentContainerComponent", () => {
+describe('DefaultViewContentContainerComponent', () => {
 	let component: DefaultViewContentContainerComponent;
 	let fixture: ComponentFixture<DefaultViewContentContainerComponent>;
 
@@ -18,7 +18,7 @@ describe("DefaultViewContentContainerComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 });

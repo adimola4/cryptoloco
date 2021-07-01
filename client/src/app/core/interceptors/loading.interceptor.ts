@@ -1,17 +1,17 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
 	HttpRequest,
 	HttpHandler,
 	HttpEvent,
 	HttpInterceptor
-} from "@angular/common/http";
-import { Observable } from "rxjs";
-import { finalize } from "rxjs/operators";
-import { LoadingService } from "../loading.service";
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { LoadingService } from '../loading.service';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
-	activeRequests: number = 0;
+	activeRequests = 0;
 
 	constructor(private loadingScreenService: LoadingService) {}
 
@@ -20,7 +20,7 @@ export class LoadingInterceptor implements HttpInterceptor {
 		next: HttpHandler
 	): Observable<HttpEvent<unknown>> {
 		if (this.activeRequests === 0) {
-			console.log("loading.......");
+			console.log('loading.......');
 			this.loadingScreenService.startLoading();
 		}
 		this.activeRequests++;
@@ -29,7 +29,7 @@ export class LoadingInterceptor implements HttpInterceptor {
 			finalize(() => {
 				this.activeRequests--;
 				if (this.activeRequests === 0) {
-					console.log("done1");
+					console.log('done1');
 					this.loadingScreenService.stopLoading();
 				}
 			})

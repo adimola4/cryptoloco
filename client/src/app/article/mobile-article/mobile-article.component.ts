@@ -5,14 +5,14 @@ import {
 	NgZone,
 	OnInit,
 	SimpleChange
-} from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { DataService } from "src/app/core/data.service";
-import { Article } from "src/app/models";
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DataService } from 'src/app/core/data.service';
+import { Article } from 'src/app/models';
 
 @Component({
-	selector: "app-mobile-article",
-	templateUrl: "./mobile-article.component.html"
+	selector: 'app-mobile-article',
+	templateUrl: './mobile-article.component.html'
 })
 export class MobileArticleComponent implements OnInit {
 	public article: Article;
@@ -24,7 +24,7 @@ export class MobileArticleComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.article = this.activatedRoute.snapshot.data["article"];
+		this.article = this.activatedRoute.snapshot.data.article;
 	}
 	ngOnChanges(changes: SimpleChange) {}
 

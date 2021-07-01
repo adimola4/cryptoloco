@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 
 @Component({
-	selector: "spinner",
+	selector: 'spinner',
 	template: `
 		<div
 			class="top-0 left-0  w-full h-full z-50 overflow-hidden  opacity-75 flex flex-col items-center justify-center"

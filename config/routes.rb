@@ -1,4 +1,3 @@
-
 Rails.application.routes.draw do
   require "sidekiq/web"
   mount Sidekiq::Web => "/sidekiq"
@@ -19,16 +18,15 @@ Rails.application.routes.draw do
       get "/currencies_trending", to: "currencies#trending"
       get "/currencies/:api_id", to: "currencies#show"
 
-
       get "/feed", to: "feed#index"
       get "/tweets", to: "tweets#index"
       get "/tweets/:twitter_user_name", to: "tweets#new"
     end
   end
 
-  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
-   !request.xhr? && request.format.html?
-  end
+  get '*path', to: "application#fallback_index_html", constraints: lambda { |request|
+    !request.xhr? && request.format.html?
+  }
 
   root to: "application#fallback_index_html"
 

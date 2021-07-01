@@ -1,11 +1,11 @@
-import { HostListener, Injectable } from "@angular/core";
+import { HostListener, Injectable } from '@angular/core';
 
 @Injectable({
-	providedIn: "root"
+	providedIn: 'root'
 })
 export class DeviceWidthService {
 	public userDeviceWidth: number;
-	@HostListener("window:resize", ["$event"])
+	@HostListener('window:resize', ['$event'])
 	onResize() {
 		this.userDeviceWidth = window.innerWidth;
 	}

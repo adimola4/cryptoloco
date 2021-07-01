@@ -1,4 +1,4 @@
-import { DatePipe } from "@angular/common";
+import { DatePipe } from '@angular/common';
 import {
 	Component,
 	Input,
@@ -10,18 +10,18 @@ import {
 	OnInit,
 	SimpleChanges,
 	ChangeDetectorRef
-} from "@angular/core";
-import { Observable } from "rxjs";
+} from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { ArticleComponent } from "../article/article.component";
-import { DataService } from "../core";
-import { CurrencyComponent } from "../currency/currency.component";
-import { Article, Currency } from "../models";
-import { DefaultViewContentContainerComponent } from "./default-view-content-container/default-view-content-container.component";
+import { ArticleComponent } from '../article/article.component';
+import { DataService } from '../core';
+import { CurrencyComponent } from '../currency/currency.component';
+import { Article, Currency } from '../models';
+import { DefaultViewContentContainerComponent } from './default-view-content-container/default-view-content-container.component';
 
 @Component({
-	selector: "content-container",
-	templateUrl: "./content-container.component.html",
+	selector: 'content-container',
+	templateUrl: './content-container.component.html',
 	providers: [DatePipe]
 })
 export class ContentContainerComponent implements OnInit {
@@ -47,46 +47,46 @@ export class ContentContainerComponent implements OnInit {
 				this.dataService
 					.getChartByCoin(currency.api_id.toString(), 1)
 					.subscribe(d => {
-						console.log("get chart from top:::: ", d);
+						console.log('get chart from top:::: ', d);
 						// console.log(d);
 						let _prices = {};
-						let _market_caps = {};
-						let _total_volumes = {};
-						for (let key of Object.keys(d)) {
+						const _market_caps = {};
+						const _total_volumes = {};
+						for (const key of Object.keys(d)) {
 							console.log(key);
-							let obj = {
+							const obj = {
 								name: currency.title.toUpperCase(),
 								series: [
 									{
-										name: "",
-										value: "",
-										vol: "",
-										marketCap: "",
-										date: ""
+										name: '',
+										value: '',
+										vol: '',
+										marketCap: '',
+										date: ''
 									}
 								]
 							};
-							let o = d[key];
+							const o = d[key];
 							for (let i = 0; i < o.length; i++) {
-								let _date =
-									this.datePipe.transform(new Date(o[i][0]), "h:mm a") ||
+								const _date =
+									this.datePipe.transform(new Date(o[i][0]), 'h:mm a') ||
 									new Date(o[i][0]).toString();
-								let _fulldate =
+								const _fulldate =
 									this.datePipe.transform(
 										new Date(o[i][0]),
-										"M/d/yy, h:mm a"
+										'M/d/yy, h:mm a'
 									) || new Date(o[i][0]).toString();
 								obj.series.push({
 									name: _date,
 									value: o[i][1],
-									vol: d["total_volumes"][i][1],
-									marketCap: d["market_caps"][i][1],
+									vol: d.total_volumes[i][1],
+									marketCap: d.market_caps[i][1],
 									date: _fulldate
 								});
 							}
 							obj.series.splice(0, 1);
 
-							if (key === "prices") {
+							if (key === 'prices') {
 								_prices = obj;
 							}
 						}
@@ -95,9 +95,9 @@ export class ContentContainerComponent implements OnInit {
 					});
 			});
 
-			console.log("ggggg", this.topCurrencies);
+			console.log('ggggg', this.topCurrencies);
 		});
 
-		console.log("charttttt", this.chartData);
+		console.log('charttttt', this.chartData);
 	}
 }

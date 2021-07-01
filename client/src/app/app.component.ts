@@ -4,30 +4,22 @@ import {
 	Component,
 	OnInit,
 	ViewChild
-} from "@angular/core";
-import { Meta } from "@angular/platform-browser";
-import { NavigationEnd, Router } from "@angular/router";
-import { forkJoin, Observable } from "rxjs";
-import { take } from "rxjs/operators";
-import { SideBarService } from "./core";
-import { DataService } from "./core/data.service";
-import { DashboardComponent } from "./dashboard";
-import { Currency, Source } from "./models";
+} from '@angular/core';
+import { Meta } from '@angular/platform-browser';
+import { NavigationEnd, Router } from '@angular/router';
+import { forkJoin, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { SideBarService } from './core';
+import { DataService } from './core/data.service';
+import { DashboardComponent } from './dashboard';
+import { Currency, Source } from './models';
 
 @Component({
-	selector: "app-root",
-	templateUrl: "./app.component.html",
-	styleUrls: ["./app.component.scss"]
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewChecked {
-	sourcesOBS$: Observable<Source[]>;
-	allSources: Source[];
-	currenciesOBS$: Observable<Currency[]>;
-	currencies: Currency[];
-	@ViewChild(DashboardComponent, { static: false })
-	private dashboardComponent: DashboardComponent;
-	routerSubscription: any;
-	show = false;
 
 	constructor(
 		private metaService: Meta,
@@ -42,7 +34,24 @@ export class AppComponent implements OnInit, AfterViewChecked {
 				this.router.navigated = false;
 			}
 		});
+		if(localStorage.theme === undefined){
+			document.getElementsByTagName('html')[0].classList.add('dark');
+			localStorage.setItem('theme', 'dark');
+	
+		}
+		
+
 	}
+	sourcesOBS$: Observable<Source[]>;
+	allSources: Source[];
+	currenciesOBS$: Observable<Currency[]>;
+	currencies: Currency[];
+	@ViewChild(DashboardComponent, { static: false })
+	private dashboardComponent: DashboardComponent;
+	routerSubscription: any;
+	show = false;
+	title = 'Cryptoloco';
+	setModeTheme = false;
 	ngAfterViewChecked(): void {
 		this.cdRef.detectChanges();
 	}
@@ -61,9 +70,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
 				this.currencies = result[1];
 				console.log(this.currencies);
 			});
+		
 	}
-	title = "Cryptoloco";
-	setModeTheme = false;
 
 	openSidebar() {
 		this.sidebarService.setShowSideBar(true);
@@ -72,10 +80,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
 	getMode($event: any) {
 		this.setModeTheme = $event;
 		if (this.setModeTheme) {
-			this.metaService.addTags([{ name: "" }]);
+			this.metaService.addTags([{ name: '' }]);
 		} else {
 		}
-		console.log("change theme ", this.setModeTheme);
+		console.log('change theme ', this.setModeTheme);
 	}
 
 	showCurrency(currency: Currency) {

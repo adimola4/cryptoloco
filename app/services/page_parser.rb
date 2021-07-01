@@ -14,14 +14,12 @@ class PageParser
     return if @url.nil?
 
     @response = HTTParty.get(@url)
-    # puts @response.body, @response.code, @response.message, @response.headers.inspect
-    
     @doc = Nokogiri::XML(@response.to_s)
-    return @doc
+    @doc
   end
 
   def parse_from_xml
-    return 
+    return
     s = @url[@url.length - 3, 3]
     if s.to_s.casecmp("xml").zero?
       return Nokogiri::XML(@response.to_s)
@@ -37,7 +35,6 @@ class PageParser
 
   def parse_from_api
     @response = HTTParty.get(@url.to_s)
-    # puts @response
     Nokogiri::HTML(@response.body)
   end
 

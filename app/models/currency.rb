@@ -5,19 +5,13 @@ class Currency < ApplicationRecord
   has_many :links
 
   validates :title, presence: { base: "Title can't be blank!" }
-  validates :title, :uniqueness => true
+  validates :title, uniqueness: true
   validates :code, presence: { base: "Code can't be blank!" }
-  validates :code, :uniqueness => true
-  validates :code, :uniqueness => true
+  validates :code, uniqueness: true
+  validates :code, uniqueness: true
   validates :title, length: { maximum: 255 }
 
   scope :sort_by_rank, ->(column = :rank) { order(column => :asc) }
 
-
-
-  def self.getCurrencies
-
-  end
-
-  
+  def self.getCurrencies; end
 end

@@ -1,0 +1,20 @@
+<div class="relative h-screen w-screen md:flex flex flex-wrap overflow-hidden md:-mx-4">
+    <!-- <div class="w-full overflow-hidden sm:w-full md:my-4 md:px-4 md:w-1/2">
+        <top-currency-chart class="w-full h-full"></top-currency-chart>
+    </div> -->
+    <div class="w-full overflow-hidden  md:my-4 md:px-4">
+        <app-tabs class="w-full ">
+            <app-tab-item *ngFor="let currency of currencies | async" >
+              <app-tab-label >
+                <div class="flex flex-row justify-between items-center gap-5">
+                <img class="flex h-10 w-10 rounded-full" src="{{currency?.img_url}}"/> 
+                <div class="flex text-sm leading-5 text-left text-Aqua-100 font-semibold uppercase ">{{currency.code}}</div>
+                </div>
+            </app-tab-label>
+              <app-tab-body>
+                <app-chart-currency  [currency]="currency"></app-chart-currency>
+              </app-tab-body>
+            </app-tab-item>
+          </app-tabs>
+    </div>
+</div>

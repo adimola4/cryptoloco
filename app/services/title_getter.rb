@@ -12,6 +12,5 @@ class TitleGetter
 
     @response = HTTParty.get(@url, follow_redirects: false)
     @doc = Nokogiri::HTML(@response.to_s)
-    p @doc.search("meta").search("title")
   end
 end

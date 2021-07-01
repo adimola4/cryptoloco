@@ -1,56 +1,34 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
 	HttpClient,
 	HttpErrorResponse,
 	HttpHeaders,
 	HttpParams
-} from "@angular/common/http";
-import { Observable, throwError, BehaviorSubject, of } from "rxjs";
-import { map, catchError, tap, shareReplay, switchMap } from "rxjs/operators";
+} from '@angular/common/http';
+import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
+import { map, catchError, tap, shareReplay, switchMap } from 'rxjs/operators';
 
-import { CacheInterceptor } from "./interceptors";
+import { CacheInterceptor } from './interceptors';
 
-import { Article } from "../models/article";
-import { Source } from "../models/source";
-import { Currency } from "../models/currency";
-import { Category } from "../models/category";
-import { TrackerErrorMessage } from "../models/trackerErrorMessage";
-import { Tweet } from "../models";
-import { environment } from "src/environments/environment";
+import { Article } from '../models/article';
+import { Source } from '../models/source';
+import { Currency } from '../models/currency';
+import { Category } from '../models/category';
+import { TrackerErrorMessage } from '../models/trackerErrorMessage';
+import { Tweet } from '../models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-	providedIn: "root"
+	providedIn: 'root'
 })
 export class DataService {
-	API_URL = environment.production
-		? "https://cryptoloco.herokuapp.com/api/v1/"
-		: "http://localhost:3000/api/v1/";
-	TOP_CURRENCIES_API_URL = "https://api.coingecko.com/api/v3/search/trending";
-
-	API_CHART_90d = (a: string) => {
-		return `https://api.coingecko.com/api/v3/coins/${a}/market_chart?vs_currency=usd&days=90&interval=daily`;
-	};
-	API_CHART_1d = (a: string) => {
-		return `https://api.coingecko.com/api/v3/coins/${a}/market_chart?vs_currency=usd&days=1`;
-	};
-
-	httpOptions = {
-		headers: new HttpHeaders({
-			"Content-Type": "application/json",
-			Accept: "*/*"
-		})
-	};
-
-	private sourcesRequest$: Observable<Source[]>;
-	private currenciesRequest$: Observable<Currency[]>;
-	private feedRequest$: Observable<Article[]>;
 
 	constructor(private http: HttpClient) {}
 
 	get sources$(): Observable<Source[]> {
 		if (!this.sourcesRequest$) {
 			this.sourcesRequest$ = this.http
-				.get<Source[]>(this.API_URL + "sources", this.httpOptions)
+				.get<Source[]>(this.API_URL + 'sources', this.httpOptions)
 				.pipe(shareReplay(1), catchError(this.handleError));
 		}
 
@@ -59,20 +37,42 @@ export class DataService {
 	get currencies$(): Observable<Currency[]> {
 		if (!this.currenciesRequest$) {
 			this.currenciesRequest$ = this.http
-				.get<Currency[]>(this.API_URL + "currencies", this.httpOptions)
+				.get<Currency[]>(this.API_URL + 'currencies', this.httpOptions)
 				.pipe(shareReplay(1), catchError(this.handleError));
 		}
 
 		return this.currenciesRequest$;
 	}
+	API_URL = environment.production
+		? 'https://cryptoloco.herokuapp.com/api/v1/'
+		: 'http://localhost:3000/api/v1/';
+	TOP_CURRENCIES_API_URL = 'https://api.coingecko.com/api/v3/search/trending';
+
+	httpOptions = {
+		headers: new HttpHeaders({
+			'Content-Type': 'application/json',
+			Accept: '*/*'
+		})
+	};
+
+	private sourcesRequest$: Observable<Source[]>;
+	private currenciesRequest$: Observable<Currency[]>;
+	private feedRequest$: Observable<Article[]>;
+
+	API_CHART_90d = (a: string) => {
+		return `https://api.coingecko.com/api/v3/coins/${a}/market_chart?vs_currency=usd&days=90&interval=daily`;
+	}
+	API_CHART_1d = (a: string) => {
+		return `https://api.coingecko.com/api/v3/coins/${a}/market_chart?vs_currency=usd&days=1`;
+	}
 
 	getFeed(): Observable<Article[]> {
 		return this.http
-			.get<Article[]>(this.API_URL + "feed", this.httpOptions)
+			.get<Article[]>(this.API_URL + 'feed', this.httpOptions)
 			.pipe(
 				tap(),
 				shareReplay({ bufferSize: 1, refCount: true }),
-				tap(() => console.log("after sharing"))
+				tap(() => console.log('after sharing'))
 			);
 	}
 
@@ -92,10 +92,10 @@ export class DataService {
 	private handleHttpError(
 		error: HttpErrorResponse
 	): Observable<TrackerErrorMessage> {
-		let dataError = new TrackerErrorMessage();
+		const dataError = new TrackerErrorMessage();
 		dataError.errorNumber = 100;
 		dataError.errorMessage = error.statusText;
-		dataError.messageView = "Houston, we have a problem?!";
+		dataError.messageView = 'Houston, we have a problem?!';
 		return throwError(dataError);
 	}
 
@@ -104,7 +104,7 @@ export class DataService {
 	}
 
 	addSource(newSource: Source): Observable<Source> {
-		return this.http.post<Source>(this.API_URL + "sources", newSource);
+		return this.http.post<Source>(this.API_URL + 'sources', newSource);
 	}
 
 	getArticleByTitle(title: string): Observable<Article> {
@@ -122,21 +122,21 @@ export class DataService {
 
 	getCurrencies(): Observable<Currency[]> {
 		return this.http
-			.get<Currency[]>(this.API_URL + "currencies", this.httpOptions)
+			.get<Currency[]>(this.API_URL + 'currencies', this.httpOptions)
 			.pipe(
 				tap(console.log),
 				shareReplay(1),
-				tap(() => console.log("after sharing"))
+				tap(() => console.log('after sharing'))
 			);
 	}
 
 	getTopCurrency(): Observable<Currency[]> {
 		return this.http
-			.get<Currency>(this.API_URL + "currencies_trending", this.httpOptions)
+			.get<Currency>(this.API_URL + 'currencies_trending', this.httpOptions)
 			.pipe(
 				tap(console.log),
 				shareReplay(1),
-				tap(() => console.log("after sharing"))
+				tap(() => console.log('after sharing'))
 				// catchError(this.handleError),
 				//   map((data: {coins:any[]}) => {
 				//     let coins:Currency[]=[];
@@ -169,11 +169,11 @@ export class DataService {
 
 	getTweets(): Observable<Tweet[]> {
 		return this.http
-			.get<Tweet[]>(this.API_URL + "tweets", this.httpOptions)
+			.get<Tweet[]>(this.API_URL + 'tweets', this.httpOptions)
 			.pipe(
 				tap(),
 				shareReplay({ bufferSize: 1, refCount: true }),
-				tap(() => console.log("after sharing"))
+				tap(() => console.log('after sharing'))
 			);
 	}
 
@@ -186,7 +186,7 @@ export class DataService {
 			.pipe(
 				tap(),
 				shareReplay({ bufferSize: 1, refCount: true }),
-				tap(() => console.log("after sharing"))
+				tap(() => console.log('after sharing'))
 			);
 	}
 
@@ -197,7 +197,7 @@ export class DataService {
 				.pipe(
 					tap(),
 					shareReplay({ bufferSize: 1, refCount: true }),
-					tap(() => console.log("after sharing"))
+					tap(() => console.log('after sharing'))
 				);
 		} else {
 			return this.http
@@ -205,7 +205,7 @@ export class DataService {
 				.pipe(
 					tap(),
 					shareReplay({ bufferSize: 1, refCount: true }),
-					tap(() => console.log("after sharing"))
+					tap(() => console.log('after sharing'))
 				);
 		}
 	}

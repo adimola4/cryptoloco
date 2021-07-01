@@ -7,11 +7,7 @@ class SourceUpdater
 
   def run
     @sources.each do |source|
-      if source.id?
-        Source::FetchWorker.perform_async(source.id)
-      else
-        p "not found"
-      end
+      Source::FetchWorker.perform_async(source.id) if source.id?
     end
   end
 end
