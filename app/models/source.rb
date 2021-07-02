@@ -26,7 +26,7 @@ class Source < ApplicationRecord
 
     @articles = SourceFetcher.new(source).run
     @articles.each do |article|
-      found_article = Article.where("source_id = ? and original_url = ? and published_date = ?", source.id, article["original_url"], article["published_date"].to_time)
+      found_article = Article.where("source_id = ? and original_url = ? and published_date = ? and image_url = ?", source.id, article["original_url"], article["published_date"].to_time, article["image_url"])
       # puts "article", Article.where("source_id = ? and original_url = ? and published_date = ?", source.id, article["original_url"], article["published_date"].to_time)[0].nil?
       if found_article.empty? || found_article.nil?
 

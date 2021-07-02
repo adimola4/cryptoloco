@@ -2,7 +2,7 @@
   <div (mode)="getMode($event)" class="bg-white dark:bg-black-400 relative sm:h-screen md:flex">
     
     <!-- mobile menu bar -->
-    <div class="bg-white dark:bg-black-500  text-Gray-200  dark:text-gray-100 flex justify-between md:hidden">
+    <div class="bg-white dark:bg-black-500  text-Gray-200  dark:text-gray-100 flex  md:hidden">
       <button (click)="openSidebar()" 
               class="mobile-menu-button flex  text-gray-400 
                     rounded-full  left-0 
@@ -12,7 +12,7 @@
         </svg>
      </button>
       <!-- logo -->
-      <a href="#" class="w-full p-4 text-brand-100  font-bold font-sans"><span class="">CRYPTOLOCO</span></a>
+      <a href="#" class=" pt-4 text-brand-100  font-bold font-sans"><span class="">CRYPTOLOCO</span></a>
     </div >
     <button (click)="openSidebar()" 
               class="mobile-menu-button hidden sm:flex absolute  text-gray-400 border-2 border-gray-400

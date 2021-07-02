@@ -4,5 +4,5 @@
             <img src="{{currency?.img_url}}"/>      
       </span>
       <span [ngClass]="{'text-green-400' : currency_prec === true , 'text-red-400' : currency_prec === false  }"  class="hidden row-start-2 col-start-3 " >{{currency?.p1h   }}%</span>      
-      <span class="col-start-3 " >{{currency?.price_usd | currency:'USD' }}</span>
+      <span [ngClass]="{'text-green-400' : currency_prec === true , 'text-red-400' : currency_prec === false  }" class="col-start-3 " >{{currency?.price_usd | currency:'USD' }}</span>
 </a>
