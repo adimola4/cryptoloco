@@ -1,6 +1,6 @@
 <h2 align="center" style="color:#f7931c">Cryptoloco</h2>
 <p align="center"> Cryptoloco is a news aggregator platform indicating impact on price and market for traders and cryptocurrency enthusiasts. <p>
-<p>🔨🔨🔨 Work in progress 🔨🔨🔨</p>
+<p>🔨🔨🔨 Project in progress 🔨🔨🔨</p>
 <br/>
 
 <p>Backend: Ruby on rails.</p>
