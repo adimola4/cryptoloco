@@ -4,23 +4,22 @@ import {
 	Component,
 	OnInit,
 	ViewChild
-} from '@angular/core';
-import { Meta } from '@angular/platform-browser';
-import { NavigationEnd, Router } from '@angular/router';
-import { forkJoin, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { SideBarService } from './core';
-import { DataService } from './core/data.service';
-import { DashboardComponent } from './dashboard';
-import { Currency, Source } from './models';
+} from "@angular/core";
+import { Meta } from "@angular/platform-browser";
+import { NavigationEnd, Router } from "@angular/router";
+import { forkJoin, Observable } from "rxjs";
+import { take } from "rxjs/operators";
+import { SideBarService } from "./core";
+import { DataService } from "./core/data.service";
+import { DashboardComponent } from "./dashboard";
+import { Currency, Source } from "./models";
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	selector: "app-root",
+	templateUrl: "./app.component.html",
+	styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit, AfterViewChecked {
-
 	constructor(
 		private metaService: Meta,
 		private dataService: DataService,
@@ -34,13 +33,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
 				this.router.navigated = false;
 			}
 		});
-		if(localStorage.theme === undefined){
-			document.getElementsByTagName('html')[0].classList.add('dark');
-			localStorage.setItem('theme', 'dark');
-	
+		if (localStorage.theme === undefined) {
+			document.getElementsByTagName("html")[0].classList.add("dark");
+			localStorage.setItem("theme", "dark");
 		}
-		
-
 	}
 	sourcesOBS$: Observable<Source[]>;
 	allSources: Source[];
@@ -50,7 +46,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
 	private dashboardComponent: DashboardComponent;
 	routerSubscription: any;
 	show = false;
-	title = 'Cryptoloco';
+	title = "Cryptoloco";
 	setModeTheme = false;
 	ngAfterViewChecked(): void {
 		this.cdRef.detectChanges();
@@ -59,7 +55,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
 	ngOnInit(): void {
 		this.sourcesOBS$ = this.dataService.sources$;
 		this.currenciesOBS$ = this.dataService.currencies$;
-	
+
 		forkJoin([this.sourcesOBS$, this.currenciesOBS$])
 			.pipe(take(1))
 			.subscribe(result => {
@@ -67,7 +63,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
 				this.currencies = result[1];
 			});
-		
 	}
 
 	openSidebar() {
@@ -77,7 +72,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
 	getMode($event: any) {
 		this.setModeTheme = $event;
 		if (this.setModeTheme) {
-			this.metaService.addTags([{ name: '' }]);
+			this.metaService.addTags([{ name: "" }]);
 		} else {
 		}
 	}

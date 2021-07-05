@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe } from "@angular/common";
 import {
 	Component,
 	Input,
@@ -10,18 +10,18 @@ import {
 	OnInit,
 	SimpleChanges,
 	ChangeDetectorRef
-} from '@angular/core';
-import { Observable } from 'rxjs';
+} from "@angular/core";
+import { Observable } from "rxjs";
 
-import { ArticleComponent } from '../article/article.component';
-import { DataService } from '../core';
-import { CurrencyComponent } from '../currency/currency.component';
-import { Article, Currency } from '../models';
-import { DefaultViewContentContainerComponent } from './default-view-content-container/default-view-content-container.component';
+import { ArticleComponent } from "../article/article.component";
+import { DataService } from "../core";
+import { CurrencyComponent } from "../currency/currency.component";
+import { Article, Currency } from "../models";
+import { DefaultViewContentContainerComponent } from "./default-view-content-container/default-view-content-container.component";
 
 @Component({
-	selector: 'content-container',
-	templateUrl: './content-container.component.html',
+	selector: "content-container",
+	templateUrl: "./content-container.component.html",
 	providers: [DatePipe]
 })
 export class ContentContainerComponent implements OnInit {
@@ -47,7 +47,6 @@ export class ContentContainerComponent implements OnInit {
 				this.dataService
 					.getChartByCoin(currency.api_id.toString(), 1)
 					.subscribe(d => {
-						
 						let _prices = {};
 						const _market_caps = {};
 						const _total_volumes = {};
@@ -56,23 +55,23 @@ export class ContentContainerComponent implements OnInit {
 								name: currency.title.toUpperCase(),
 								series: [
 									{
-										name: '',
-										value: '',
-										vol: '',
-										marketCap: '',
-										date: ''
+										name: "",
+										value: "",
+										vol: "",
+										marketCap: "",
+										date: ""
 									}
 								]
 							};
 							const o = d[key];
 							for (let i = 0; i < o.length; i++) {
 								const _date =
-									this.datePipe.transform(new Date(o[i][0]), 'h:mm a') ||
+									this.datePipe.transform(new Date(o[i][0]), "h:mm a") ||
 									new Date(o[i][0]).toString();
 								const _fulldate =
 									this.datePipe.transform(
 										new Date(o[i][0]),
-										'M/d/yy, h:mm a'
+										"M/d/yy, h:mm a"
 									) || new Date(o[i][0]).toString();
 								obj.series.push({
 									name: _date,
@@ -84,7 +83,7 @@ export class ContentContainerComponent implements OnInit {
 							}
 							obj.series.splice(0, 1);
 
-							if (key === 'prices') {
+							if (key === "prices") {
 								_prices = obj;
 							}
 						}
@@ -92,8 +91,6 @@ export class ContentContainerComponent implements OnInit {
 						this.chartData = [...this.chartData];
 					});
 			});
-
 		});
-
 	}
 }

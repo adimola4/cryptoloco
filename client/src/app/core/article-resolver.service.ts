@@ -5,12 +5,12 @@ import {
 	Resolve,
 	Router,
 	RouterStateSnapshot
-} from '@angular/router';
-import { Injectable } from '@angular/core';
-import { DataService } from './data.service';
-import { Article } from '../models';
-import { EMPTY, Observable, of } from 'rxjs';
-import { catchError, mergeMap, take } from 'rxjs/operators';
+} from "@angular/router";
+import { Injectable } from "@angular/core";
+import { DataService } from "./data.service";
+import { Article } from "../models";
+import { EMPTY, Observable, of } from "rxjs";
+import { catchError, mergeMap, take } from "rxjs/operators";
 
 @Injectable()
 export class ArticleResolver implements Resolve<Article> {
@@ -27,11 +27,11 @@ export class ArticleResolver implements Resolve<Article> {
 					if (article) {
 						return of(article);
 					} else {
-						this.router.navigate(['/dashboard']);
+						this.router.navigate(["/dashboard"]);
 						return EMPTY;
 					}
 				}),
-				catchError(err => of('no article found'))
+				catchError(err => of("no article found"))
 			);
 	}
 }

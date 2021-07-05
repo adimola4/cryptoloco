@@ -1,7 +1,7 @@
-import { NUMBER_TYPE } from '@angular/compiler/src/output/output_ast';
-import { Pipe, PipeTransform } from '@angular/core';
+import { NUMBER_TYPE } from "@angular/compiler/src/output/output_ast";
+import { Pipe, PipeTransform } from "@angular/core";
 
-@Pipe({ name: 'replace' })
+@Pipe({ name: "replace" })
 export class ReplacePipe implements PipeTransform {
 	transform(
 		value: number,

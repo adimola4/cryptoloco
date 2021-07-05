@@ -1,6 +1,6 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from "@angular/animations";
 // import { CommonModule } from '@angular/common';
-import { DatePipe, CurrencyPipe } from '@angular/common';
+import { DatePipe, CurrencyPipe } from "@angular/common";
 
 import {
 	Component,
@@ -9,13 +9,13 @@ import {
 	Output,
 	EventEmitter,
 	SimpleChanges
-} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Currency } from '../models';
+} from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Currency } from "../models";
 
 @Component({
-	selector: 'app-currency',
-	templateUrl: './currency.component.html',
+	selector: "app-currency",
+	templateUrl: "./currency.component.html",
 	styles: [
 		`
 			.scroller-div {
@@ -36,18 +36,18 @@ import { Currency } from '../models';
 		`
 	],
 	animations: [
-		trigger('enterExitRight', [
-			transition(':enter', [
-				style({ opacity: 0, transform: 'translateX(200px)' }),
+		trigger("enterExitRight", [
+			transition(":enter", [
+				style({ opacity: 0, transform: "translateX(200px)" }),
 				animate(
-					'300ms ease-in',
-					style({ opacity: 1, transform: 'translateX(0)' })
+					"300ms ease-in",
+					style({ opacity: 1, transform: "translateX(0)" })
 				)
 			]),
-			transition(':leave', [
+			transition(":leave", [
 				animate(
-					'300ms ease-in',
-					style({ opacity: 0, transform: 'translateX(200px)' })
+					"300ms ease-in",
+					style({ opacity: 0, transform: "translateX(200px)" })
 				)
 			])
 		])
@@ -55,7 +55,6 @@ import { Currency } from '../models';
 	providers: [CurrencyPipe]
 })
 export class CurrencyComponent implements OnInit {
-
 	constructor(private router: Router, private route: ActivatedRoute) {}
 	currency_prec = true;
 	@Input()

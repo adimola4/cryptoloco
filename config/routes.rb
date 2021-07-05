@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       get "/currencies_trending", to: "currencies#trending"
       get "/currencies/:api_id", to: "currencies#show"
 
-      get "/feed", to: "feed#index"
+      get "/feed/:page", to: "feed#index"
       get "/tweets", to: "tweets#index"
       get "/tweets/:twitter_user_name", to: "tweets#new"
     end

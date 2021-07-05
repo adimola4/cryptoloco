@@ -17,27 +17,23 @@
               </button>
             </div>
         </div>
-        <!-- <ng-container  *ngIf="!isMobile;else mobileContainer" >        -->
-          <ng-container  *ngIf="!loading_articles;else loadingfeed" class="p-0 w-full">       
-              <article-card (click)=articleClick(article)
-
-                *ngFor="let article of articles$ | async"
+          <ng-container class="p-0 w-full">
+            <!-- <app-infinite-scroll (scrolling)="onScrollFeed()" #scroller (scroll)="onScrollFeed()"   class=" "> -->
+              <cdk-virtual-scroll-viewport #scroller itemSize="15" class="overflow-y-auto h-full">
+              <article-card (click)=articleClick(article) 
+                *cdkVirtualFor="let article of articles$ | async"
                 [article]="article"
                 routerLinkActive="active"                                 
                 (articleLinkClick)="articleClick($event)"
                 class="flex article-card dark:bg-black-300 ">
-              </article-card>                                   
-            <div *ngIf="!articles"> No articles found to your search</div>
+              </article-card>                      
+              <spinner *ngIf="isLoadingArticles$ | async" text=" Fetching articles"></spinner>
+            </cdk-virtual-scroll-viewport>
           </ng-container>
-        <!-- </ng-container> -->
-        
-        <!-- <ng-template #mobileContainer class="p-0 w-full ">
-         <h1>new mobile </h1>
-        </ng-template>
-         -->
+     
         
         <ng-template #loadingfeed class="p-0 w-full ">
-          <spinner  text="loading articles..."></spinner>
+         
         </ng-template>
 
 

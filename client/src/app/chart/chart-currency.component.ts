@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NgxChartsModule, LegendPosition } from '@swimlane/ngx-charts';
+import { Component, Input, OnInit } from "@angular/core";
+import { NgxChartsModule, LegendPosition } from "@swimlane/ngx-charts";
 
-import { DataService } from '../core';
-import { Subject } from 'rxjs';
+import { DataService } from "../core";
+import { Subject } from "rxjs";
 
-import { Currency } from '../models';
-import { DatePipe, CurrencyPipe } from '@angular/common';
+import { Currency } from "../models";
+import { DatePipe, CurrencyPipe } from "@angular/common";
 
 @Component({
-	selector: 'app-chart-currency',
-	templateUrl: './chart.component.html',
+	selector: "app-chart-currency",
+	templateUrl: "./chart.component.html",
 	providers: [DatePipe, CurrencyPipe],
 	styles: [``]
 })
@@ -25,7 +25,7 @@ export class ChartCurrencyComponent implements OnInit {
 	chDA: any = {};
 	@Input()
 	currency: Currency;
-	legendTitle = '';
+	legendTitle = "";
 	legendPosition: LegendPosition = LegendPosition.Below;
 	legend = true;
 	showLabels = true;
@@ -34,13 +34,13 @@ export class ChartCurrencyComponent implements OnInit {
 	yAxis = true;
 	showYAxisLabel = true;
 	showXAxisLabel = false;
-	xAxisLabel = '';
-	yAxisLabel = '';
+	xAxisLabel = "";
+	yAxisLabel = "";
 	timeline = true;
 	roundDomains = false;
 
 	colorScheme = {
-		domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+		domain: ["#5AA454", "#E44D25", "#CFC0BB", "#7aa3e5", "#a8385d", "#aae3f5"]
 	};
 	constructor(private dataService: DataService, private datePipe: DatePipe) {
 		this.view = [innerWidth / 1.3, 400];
@@ -69,24 +69,24 @@ export class ChartCurrencyComponent implements OnInit {
 			let _total_volumes = {};
 			for (const key of Object.keys(a)) {
 				const obj = {
-					name: 'Price per USD',
+					name: "Price per USD",
 					series: [
 						{
-							name: '',
-							value: '',
-							vol: '',
-							marketCap: '',
-							date: ''
+							name: "",
+							value: "",
+							vol: "",
+							marketCap: "",
+							date: ""
 						}
 					]
 				};
 				const d = a[key];
 				for (let i = 0; i < d.length; i++) {
 					const _date =
-						this.datePipe.transform(new Date(d[i][0]), 'MM/dd') ||
+						this.datePipe.transform(new Date(d[i][0]), "MM/dd") ||
 						new Date(d[i][0]).toString();
 					const _fulldate =
-						this.datePipe.transform(new Date(d[i][0]), 'M/d/yy, h:mm a') ||
+						this.datePipe.transform(new Date(d[i][0]), "M/d/yy, h:mm a") ||
 						new Date(d[i][0]).toString();
 					obj.series.push({
 						name: _date,
@@ -97,11 +97,11 @@ export class ChartCurrencyComponent implements OnInit {
 					});
 				}
 
-				if (key === 'prices') {
+				if (key === "prices") {
 					_prices = obj;
-				} else if (key === 'market_caps') {
+				} else if (key === "market_caps") {
 					_market_caps = obj;
-				} else if (key === 'total_volumes') {
+				} else if (key === "total_volumes") {
 					_total_volumes = obj;
 				}
 			}
@@ -111,8 +111,7 @@ export class ChartCurrencyComponent implements OnInit {
 	}
 
 	update(): void {}
-	onResize(event: any) {
-	}
+	onResize(event: any) {}
 
 	generateDate(): string[] {
 		const dates: string[] = [];
@@ -120,7 +119,7 @@ export class ChartCurrencyComponent implements OnInit {
 			const d = new Date()
 				.setDate(this.initialDate.getDate() - (7 - i))
 				.toString();
-			const p = this.datePipe.transform(d, 'yyyy-MM-dd');
+			const p = this.datePipe.transform(d, "yyyy-MM-dd");
 			dates.push(p || d);
 		}
 

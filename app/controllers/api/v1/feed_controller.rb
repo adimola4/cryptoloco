@@ -2,7 +2,7 @@
 
 class Api::V1::FeedController < ActionController::API
   def index
-    @articles = Article.order("created_at DESC")
+    @articles = Article.order("created_at DESC").page(params[:page])
 
     @res = []
     @articles.each do |article|
@@ -28,8 +28,7 @@ class Api::V1::FeedController < ActionController::API
           'category': article.source.categories
         }
       }
-    end
-    # puts "@res ",@res
+    end    
     render json: @res
   end
 end

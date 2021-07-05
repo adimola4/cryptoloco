@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
 import {
 	trigger,
 	state,
@@ -7,17 +7,17 @@ import {
 	animate,
 	transition,
 	keyframes
-} from '@angular/animations';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '../core/data.service';
+} from "@angular/animations";
+import { ActivatedRoute, Router } from "@angular/router";
+import { DataService } from "../core/data.service";
 
-import { Article } from '../models';
+import { Article } from "../models";
 
 @Component({
-	selector: 'app-article',
-	templateUrl: './article.component.html',
+	selector: "app-article",
+	templateUrl: "./article.component.html",
 	styles: [
-		'.video-div{ position: relative; padding-bottom: 56.25%; height:0;} .video-div iframe{ position: absolute; top:0; left:0; width:100%; height: 100%; }',
+		".video-div{ position: relative; padding-bottom: 56.25%; height:0;} .video-div iframe{ position: absolute; top:0; left:0; width:100%; height: 100%; }",
 		`
 			@keyframes 'fadeSlideGrowKeyframe' {
 				30% {
@@ -33,15 +33,15 @@ import { Article } from '../models';
 		`
 	],
 	animations: [
-		trigger('fadeSlideGrowKeyframe', [
-			transition(':enter', [
-				style({ opacity: 0, transform: 'scale(0.5) translateY(50px)' }),
+		trigger("fadeSlideGrowKeyframe", [
+			transition(":enter", [
+				style({ opacity: 0, transform: "scale(0.5) translateY(50px)" }),
 				animate(
-					'500ms',
+					"500ms",
 					keyframes([
 						style({ opacity: 1, offset: 0.3 }),
-						style({ transform: 'translateY(0)', offset: 0.6 }),
-						style({ transform: 'scale(1)', offset: 1 })
+						style({ transform: "translateY(0)", offset: 0.6 }),
+						style({ transform: "scale(1)", offset: 1 })
 					])
 				)
 			])
@@ -60,7 +60,7 @@ export class ArticleComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		if (this.article.type_of_content === 'Video') {
+		if (this.article.type_of_content === "Video") {
 			this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
 				this.article.content
 			);

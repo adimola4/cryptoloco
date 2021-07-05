@@ -1,5 +1,5 @@
-import { Article } from './article';
-import { Category } from './category';
+import { Article } from "./article";
+import { Category } from "./category";
 
 export class Source {
 	sourceID: number;

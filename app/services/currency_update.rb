@@ -22,7 +22,6 @@ class CurrencyUpdate
   end
 
   def CreateCurrency(id)
-    p "Create+++++", id
     uri = "https://api.coingecko.com/api/v3/coins/" + id + "?localization=false&tickers=false&developer_data=true&sparkline=false"
 
     @currency_details = JSON(ApiCaller.new(uri).run)

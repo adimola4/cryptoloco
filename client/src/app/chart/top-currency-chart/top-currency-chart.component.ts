@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { DataService } from 'src/app/core';
-import { Currency } from 'src/app/models';
-import { DatePipe, CurrencyPipe } from '@angular/common';
-import { NgxChartsModule, LegendPosition } from '@swimlane/ngx-charts';
+import { Component, OnInit } from "@angular/core";
+import { map } from "rxjs/operators";
+import { DataService } from "src/app/core";
+import { Currency } from "src/app/models";
+import { DatePipe, CurrencyPipe } from "@angular/common";
+import { NgxChartsModule, LegendPosition } from "@swimlane/ngx-charts";
 
 @Component({
-	selector: 'top-currency-chart',
-	templateUrl: './top-currency-chart.component.html',
+	selector: "top-currency-chart",
+	templateUrl: "./top-currency-chart.component.html",
 	providers: [DatePipe, CurrencyPipe]
 })
 export class TopCurrencyChartComponent implements OnInit {
@@ -15,7 +15,7 @@ export class TopCurrencyChartComponent implements OnInit {
 	chartData: any[] = [];
 	view: any = [600, 600];
 
-	legendTitle = 'Top Trendding Currency';
+	legendTitle = "Top Trendding Currency";
 	legendPosition: LegendPosition = LegendPosition.Below;
 	legend = true;
 	showLabels = true;
@@ -24,13 +24,13 @@ export class TopCurrencyChartComponent implements OnInit {
 	yAxis = true;
 	showYAxisLabel = true;
 	showXAxisLabel = false;
-	xAxisLabel = '';
-	yAxisLabel = '';
+	xAxisLabel = "";
+	yAxisLabel = "";
 	timeline = true;
 	roundDomains = false;
 
 	colorScheme = {
-		domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+		domain: ["#5AA454", "#E44D25", "#CFC0BB", "#7aa3e5", "#a8385d", "#aae3f5"]
 	};
 	constructor(private dataService: DataService, private datePipe: DatePipe) {
 		this.view = [innerWidth / 1.3, 400];
@@ -41,7 +41,6 @@ export class TopCurrencyChartComponent implements OnInit {
 				this.dataService
 					.getChartByCoin(currency.api_id.toString(), 1)
 					.subscribe(d => {
-					
 						let _prices = {};
 						const _market_caps = {};
 						const _total_volumes = {};
@@ -50,23 +49,23 @@ export class TopCurrencyChartComponent implements OnInit {
 								name: currency.title.toUpperCase(),
 								series: [
 									{
-										name: '',
-										value: '',
-										vol: '',
-										marketCap: '',
-										date: ''
+										name: "",
+										value: "",
+										vol: "",
+										marketCap: "",
+										date: ""
 									}
 								]
 							};
 							const o = d[key];
 							for (let i = 0; i < o.length; i++) {
 								const _date =
-									this.datePipe.transform(new Date(o[i][0]), 'h:mm a') ||
+									this.datePipe.transform(new Date(o[i][0]), "h:mm a") ||
 									new Date(o[i][0]).toString();
 								const _fulldate =
 									this.datePipe.transform(
 										new Date(o[i][0]),
-										'M/d/yy, h:mm a'
+										"M/d/yy, h:mm a"
 									) || new Date(o[i][0]).toString();
 								obj.series.push({
 									name: _date,
@@ -78,7 +77,7 @@ export class TopCurrencyChartComponent implements OnInit {
 							}
 							obj.series.splice(0, 1);
 
-							if (key === 'prices') {
+							if (key === "prices") {
 								_prices = obj;
 							}
 						}

@@ -9,13 +9,21 @@ import {
 	OnChanges,
 	ChangeDetectionStrategy,
 	SimpleChanges,
-	ViewContainerRef
-} from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { LocationStrategy, Location } from '@angular/common';
+	ViewContainerRef,
+	NgZone
+} from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { LocationStrategy, Location } from "@angular/common";
 
-import { BehaviorSubject, forkJoin, Observable, of, Subscription } from 'rxjs';
-import { Title } from '@angular/platform-browser';
+import {
+	BehaviorSubject,
+	forkJoin,
+	Observable,
+	of,
+	Subscription,
+	zip
+} from "rxjs";
+import { Title } from "@angular/platform-browser";
 import {
 	trigger,
 	state,
@@ -25,47 +33,56 @@ import {
 	keyframes,
 	stagger,
 	query
-} from '@angular/animations';
+} from "@angular/animations";
 
 // import { Source } from "../models/source";
-import { HolderDirective } from '../core/holder.directive';
+import { HolderDirective } from "../core/holder.directive";
 // import { Reader } from "app/models/reader";
-import { DataService } from '../core/data.service';
-import { Article, Currency, Tweet, ICurrency } from '../models';
-import { filter, map, take, tap } from 'rxjs/operators';
-import { ContentContainerComponent } from './content-container.component';
-import { CurrencyDetailsComponent } from '../currency/currency-details.component';
-import { ActivatedRoute, Params, Router, UrlSerializer } from '@angular/router';
-import { LoadingService } from '../core/loading.service';
+import { DataService } from "../core/data.service";
+import { Article, Currency, Tweet, ICurrency } from "../models";
+import {
+	filter,
+	map,
+	pairwise,
+	take,
+	tap,
+	throttleTime,
+	timeout
+} from "rxjs/operators";
+import { ContentContainerComponent } from "./content-container.component";
+import { CurrencyDetailsComponent } from "../currency/currency-details.component";
+import { ActivatedRoute, Params, Router, UrlSerializer } from "@angular/router";
+import { LoadingService } from "../core/loading.service";
+import { CdkVirtualScrollViewport } from "@angular/cdk/scrolling";
 
 @Component({
-	selector: 'app-dashboard',
-	templateUrl: './dashboard.component.html',
+	selector: "app-dashboard",
+	templateUrl: "./dashboard.component.html",
 	styles: [],
 	animations: [
-		trigger('fadeInGrow', [
-			transition('* => *', [
+		trigger("fadeInGrow", [
+			transition("* => *", [
 				query(
-					':enter',
+					":enter",
 					[
-						style({ opacity: 0, transform: 'translateX(-200px)' }),
+						style({ opacity: 0, transform: "translateX(-200px)" }),
 						stagger(500, [
 							animate(
-								'0.5s ease-in',
-								style({ opacity: 1, transform: 'translateX(0)' })
+								"0.5s ease-in",
+								style({ opacity: 1, transform: "translateX(0)" })
 							)
 						])
 					],
 					{ optional: true }
 				)
 			]),
-			transition(':leave', [
-				query(':leave', [
+			transition(":leave", [
+				query(":leave", [
 					style({ opacity: 1 }),
-					stagger('50ms', [
+					stagger("50ms", [
 						animate(
-							'300ms ease-in',
-							style({ opacity: 0, transform: 'translateX(-200px)' })
+							"300ms ease-in",
+							style({ opacity: 0, transform: "translateX(-200px)" })
 						)
 					])
 				])
@@ -74,24 +91,24 @@ import { LoadingService } from '../core/loading.service';
 	]
 })
 export class DashboardComponent implements OnInit, OnChanges {
-	@ViewChild('currencycontainer', { read: ViewContainerRef })
+	@ViewChild("currencycontainer", { read: ViewContainerRef })
 	entry: ViewContainerRef;
-	// @ViewChild(ContentContainerComponent, { static: false }) contentContainer: ContentContainerComponent;
 	@Input()
 	currencies: Currency[];
 	public articles: Article[] = [];
 	public tmp_articles: Article[] = [];
 	public articles$: Observable<Article[]>;
+	isLoadingArticles$: Observable<boolean>;
+	feedPage: number = 0;
+	@ViewChild("scroller") scroller: CdkVirtualScrollViewport;
 	dark: Boolean;
 	shownArticle: any;
 	currentShown = new BehaviorSubject(null);
-	userDeviceWidth: Number;
 	article_title: string;
 	searchTerm: string;
 	loading: Subscription;
 	loadingStatus = false;
-	loading_articles = true;
-	contentType = 'Default';
+	contentType = "Default";
 	shownCurrency: any;
 	componentRef: any;
 	topCurrencies: Currency[];
@@ -99,8 +116,6 @@ export class DashboardComponent implements OnInit, OnChanges {
 		return window.innerWidth <= 420;
 	}
 
-	// allReaders: Reader[];
-	// mostPopularBook: Book;
 	constructor(
 		private dataService: DataService,
 		private title: Title,
@@ -110,39 +125,33 @@ export class DashboardComponent implements OnInit, OnChanges {
 		private resolver: ComponentFactoryResolver,
 		private urlSerializer: UrlSerializer,
 		private loadingService: LoadingService,
-		private locationStrategy: LocationStrategy
+		private locationStrategy: LocationStrategy,
+		private ngZone: NgZone
 	) {}
 	ngOnChanges(changes: SimpleChanges): void {}
 
 	ngOnInit() {
+		this.isLoadingArticles$ = of(true);
 		if (
-			localStorage.theme === 'dark' ||
-			(!('theme' in localStorage) &&
-				window.matchMedia('(prefers-color-scheme: dark)').matches)
+			localStorage.theme === "dark" ||
+			(!("theme" in localStorage) &&
+				window.matchMedia("(prefers-color-scheme: dark)").matches)
 		) {
-			document.getElementsByTagName('html')[0].classList.add('dark');
+			document.getElementsByTagName("html")[0].classList.add("dark");
 			this.dark = true;
 		} else {
-			document.getElementsByTagName('html')[0].classList.remove('dark');
+			document.getElementsByTagName("html")[0].classList.remove("dark");
 			this.dark = false;
 		}
 		this.dataService.currencies$.subscribe(data => {
 			this.currencies = data;
 		});
-		this.articles$ = this.dataService.getFeed();
+		this.articles$ = this.dataService.getFeed(this.feedPage);
 		this.articles$.subscribe(data => {
-			this.loading_articles = false;
+			this.isLoadingArticles$ = of(false);
 			this.tmp_articles = data;
 		});
-		this.dataService.getFeed().subscribe(
-			(data: Article[]) => {
-				data.map(a => {
-					this.articles.push(a);
-				});
-			},
-			(err: any) => console.log(err)
-		
-		);
+
 		this.route.params.subscribe((params: Params) => {
 			this.article_title = params.articleTitle;
 			this.articles$
@@ -156,13 +165,25 @@ export class DashboardComponent implements OnInit, OnChanges {
 				)
 				.subscribe(result => (this.shownArticle = result));
 		});
-		
+
 		this.dataService.getTopCurrency().subscribe(data => {
-		
 			this.topCurrencies = data;
 		});
-
-		this.userDeviceWidth = window.innerWidth;
+	}
+	getArticleData() {
+		this.feedPage++;
+		this.dataService.getFeed(this.feedPage).subscribe((data: Article[]) => {
+			zip(of(data), this.articles$)
+				.pipe(map(x => [...x[1], ...x[0]]))
+				.subscribe(data => {
+					this.articles$ = of(data);
+					try {
+						this.scroller.scrollTo({
+							top: parseInt(this.scroller._totalContentHeight)
+						});
+					} catch (err) {}
+				});
+		});
 	}
 	ngAfterViewInit(): void {
 		this.loading = this.loadingService.loading$
@@ -170,51 +191,63 @@ export class DashboardComponent implements OnInit, OnChanges {
 			.subscribe((status: boolean) => {
 				this.loadingStatus = status;
 			});
+		this.scroller
+			.elementScrolled()
+			.pipe(
+				map(() => this.scroller.measureScrollOffset("bottom")),
+				pairwise(),
+				filter(([y1, y2]) => y2 < y1 && y2 < 140),
+				throttleTime(200)
+			)
+			.subscribe(() => {
+				this.ngZone.run(() => {
+					this.isLoadingArticles$ = of(true);
+					this.getArticleData();
+					this.scroller.scrollTo({
+						top: parseInt(this.scroller._totalContentHeight)
+					});
+					this.isLoadingArticles$ = of(false);
+				});
+			});
 	}
+	
 	reload() {
 		this.router.navigate([this.route]);
 	}
 	articleClick(event: any) {
-
 		this.shownArticle = event;
-		this.contentType = 'Article';
+		this.contentType = "Article";
 	}
 	currencyClick(event: any) {
 		this.shownCurrency = event;
-		this.contentType = 'Currency';
+		this.contentType = "Currency";
 		this.createCurrencyComponent(this.shownCurrency);
 	}
-	listFake(i: number): Array<number> {
-		const a = [];
-		for (let index = 0; index < i; index++) {
-			a.push(i);
-		}
-		return a;
-	}
+
 	searchChange(term: string) {
 		this.searchTerm = term;
 
-		if (term === 'News') {
+		if (term === "News") {
 			of(this.tmp_articles)
 				.pipe(
 					map((data: Article[]) => {
 						return data.filter(
-							(article: Article) => article.source.type === 'News'
+							(article: Article) => article.source.type === "News"
 						);
 					}),
-					filter((articless: Article[]) => {
-						return articless && articless.length > 0;
+					filter((articles_array: Article[]) => {
+						return articles_array && articles_array.length > 0;
 					})
 				)
 				.subscribe(result => (this.articles$ = of(result)));
-		} else if (term === 'Media') {
+		} else if (term === "Media") {
 			of(this.tmp_articles)
 				.pipe(
 					map((data: Article[]) =>
-						data.filter((article: Article) => article.source.type === 'Media')
+						data.filter((article: Article) => article.source.type === "Media")
 					),
-					filter((articless: Article[]) => {
-						return articless && articless.length > 0;
+					filter((articles_array: Article[]) => {
+						return articles_array && articles_array.length > 0;
 					})
 				)
 				.subscribe(result => (this.articles$ = of(result)));
@@ -237,8 +270,8 @@ export class DashboardComponent implements OnInit, OnChanges {
 						return false;
 					});
 				}),
-				filter((articless: Article[]) => {
-					return articless && articless.length > 0;
+				filter((articles_array: Article[]) => {
+					return articles_array && articles_array.length > 0;
 				})
 			)
 			.subscribe(result => (this.articles$ = of(result)));
@@ -247,7 +280,7 @@ export class DashboardComponent implements OnInit, OnChanges {
 		this.loading.unsubscribe();
 	}
 	back() {
-		this.router.navigate(['../'], { relativeTo: this.route });
+		this.router.navigate(["../"], { relativeTo: this.route });
 	}
 	createCurrencyComponent(currency: Currency) {
 		if (this.entry !== undefined) {
@@ -262,5 +295,4 @@ export class DashboardComponent implements OnInit, OnChanges {
 	destroyComponent() {
 		this.componentRef.destroy();
 	}
-	
 }

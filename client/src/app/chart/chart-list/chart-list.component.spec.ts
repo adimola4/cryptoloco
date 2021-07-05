@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ChartListComponent } from './chart-list.component';
+import { ChartListComponent } from "./chart-list.component";
 
-describe('ChartListComponent', () => {
+describe("ChartListComponent", () => {
 	let component: ChartListComponent;
 	let fixture: ComponentFixture<ChartListComponent>;
 
@@ -18,7 +18,7 @@ describe('ChartListComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it("should create", () => {
 		expect(component).toBeTruthy();
 	});
 });

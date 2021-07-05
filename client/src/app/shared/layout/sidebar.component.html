@@ -1,18 +1,14 @@
-<!-- side bar main wrapper -->
 <div class="side-nav-bar fixed inset-0 z-50"
     [ngClass]="{ 'side-nav-bar-collapsed': !(showSideBar | async) }">
     
-    <!-- overlay -->
     <div class="side-nav-bar-overlay bg-black h-full w-full" 
     [ngStyle]="{ 'transition': 'background-color ' + duration + 's, visibility ' + duration + 's' }"
     [ngClass]="{ 'side-nav-bar-overlay-collapsed': !(showSideBar | async) }"
         (click)="onSidebarClose()"></div>
     
-    <!-- side bar-->
     <div class="side-nav-bar-menu-container  bg-White-100 dark:bg-black-100  border-r-2 border-gray-400 flex flex-col absolute inset-y-0" 
     [ngStyle]="getSideBarStyle(showSideBar )">
         
-        <!-- close button -->
         <div class="flex items-center justify-between font-normal text-xs py-4 pointer-events-auto text-left">
             <a href="" class="flex items-center space-x-2 px-4">                    
                 <span class="text-2xl font-extrabold text-brand-100   font-sans">  CRYPTOLOCO</span>
@@ -58,7 +54,6 @@
                 <dark-mode-button (click)="onSidebarClose()" class="h-full flex cursor-pointer "></dark-mode-button>    
             </div>
         </div>
-        <!-- side bar content -->
      
     </div>
 </div>

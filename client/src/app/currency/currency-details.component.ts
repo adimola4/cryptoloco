@@ -4,7 +4,7 @@ import {
 	style,
 	transition,
 	trigger
-} from '@angular/animations';
+} from "@angular/animations";
 import {
 	Component,
 	OnInit,
@@ -12,19 +12,19 @@ import {
 	ViewChild,
 	TemplateRef,
 	ComponentFactoryResolver
-} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { DataService } from '../core/data.service';
-import { DatePipe, CurrencyPipe } from '@angular/common';
+} from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { DataService } from "../core/data.service";
+import { DatePipe, CurrencyPipe } from "@angular/common";
 
-import { ChartCurrencyComponent } from '../chart/chart-currency.component';
+import { ChartCurrencyComponent } from "../chart/chart-currency.component";
 
-import { Currency, ICurrency } from '../models';
+import { Currency, ICurrency } from "../models";
 
 @Component({
-	selector: 'currency-details',
-	templateUrl: './currency-details.component.html',
+	selector: "currency-details",
+	templateUrl: "./currency-details.component.html",
 	styles: [
 		`
 			.desc a {
@@ -64,26 +64,26 @@ import { Currency, ICurrency } from '../models';
 		`
 	],
 	animations: [
-		trigger('fadeSlideGrowKeyframe', [
-			transition(':enter', [
-				style({ opacity: 0, transform: 'scale(0.5) translateY(50px)' }),
+		trigger("fadeSlideGrowKeyframe", [
+			transition(":enter", [
+				style({ opacity: 0, transform: "scale(0.5) translateY(50px)" }),
 				animate(
-					'500ms',
+					"500ms",
 					keyframes([
 						style({ opacity: 1, offset: 0.3 }),
-						style({ transform: 'translateY(0)', offset: 0.6 }),
-						style({ transform: 'scale(1)', offset: 1 })
+						style({ transform: "translateY(0)", offset: 0.6 }),
+						style({ transform: "scale(1)", offset: 1 })
 					])
 				)
 			]),
-			transition(':leave', [
-				style({ opacity: 1, transform: 'scale(1) translateY(0)' }),
+			transition(":leave", [
+				style({ opacity: 1, transform: "scale(1) translateY(0)" }),
 				animate(
-					'500ms',
+					"500ms",
 					keyframes([
 						style({ opacity: 0, offset: 0.3 }),
-						style({ transform: 'translateY(50px)', offset: 0.6 }),
-						style({ transform: 'scale(0.5)', offset: 1 })
+						style({ transform: "translateY(50px)", offset: 0.6 }),
+						style({ transform: "scale(0.5)", offset: 1 })
 					])
 				)
 			])
@@ -92,7 +92,7 @@ import { Currency, ICurrency } from '../models';
 	providers: [DatePipe, CurrencyPipe]
 })
 export class CurrencyDetailsComponent implements OnInit, ICurrency {
-	@ViewChild('ChartTemplate') ChartTemplate: TemplateRef<any>;
+	@ViewChild("ChartTemplate") ChartTemplate: TemplateRef<any>;
 
 	currency_prec = true;
 	@Input()

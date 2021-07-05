@@ -1,56 +1,56 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
-import { ArticleResolver, CurrencyResolver } from './core';
+import { ArticleResolver, CurrencyResolver } from "./core";
 import {
 	DashboardComponent,
 	DefaultViewContentContainerComponent
-} from './dashboard/';
-import { AboutComponent } from './about/about.component';
-import { ArticleComponent } from './article/article.component';
-import { MobileArticleComponent } from './article/mobile-article/mobile-article.component';
-import { from } from 'rxjs';
-import { CurrencyDetailsComponent } from './currency/currency-details.component';
-import { ChartListComponent } from './chart/chart-list/chart-list.component';
+} from "./dashboard/";
+import { AboutComponent } from "./about/about.component";
+import { ArticleComponent } from "./article/article.component";
+import { MobileArticleComponent } from "./article/mobile-article/mobile-article.component";
+import { from } from "rxjs";
+import { CurrencyDetailsComponent } from "./currency/currency-details.component";
+import { ChartListComponent } from "./chart/chart-list/chart-list.component";
 
 const routes: Routes = [
 	{
-		path: 'article/:articleTitle',
+		path: "article/:articleTitle",
 		component: MobileArticleComponent,
 		resolve: { article: ArticleResolver }
 	},
 	{
-		path: 'currency/:currencyId',
+		path: "currency/:currencyId",
 		component: CurrencyDetailsComponent,
 		resolve: { currency: CurrencyResolver }
 	},
 	{
-		path: 'dashboard',
+		path: "dashboard",
 		component: DashboardComponent,
 		children: [
 			{
-				path: '',
+				path: "",
 				children: [
 					{
-						path: ':articleTitle',
+						path: ":articleTitle",
 						component: ArticleComponent,
 						resolve: { article: ArticleResolver }
 					},
 					{
-						path: 'currency/:currencyId',
+						path: "currency/:currencyId",
 						component: CurrencyDetailsComponent,
 						resolve: { currency: CurrencyResolver }
 					},
-					{ path: '', component: DefaultViewContentContainerComponent },
-					{ path: '', redirectTo: '', pathMatch: 'full' }
+					{ path: "", component: DefaultViewContentContainerComponent },
+					{ path: "", redirectTo: "", pathMatch: "full" }
 				]
 			}
 		]
 		//  resolve: { currencies:CurrenciesResolver}
 	},
-	{ path: 'about', component: AboutComponent },
-	{ path: 'charts', component: ChartListComponent },
-	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+	{ path: "about", component: AboutComponent },
+	{ path: "charts", component: ChartListComponent },
+	{ path: "", redirectTo: "dashboard", pathMatch: "full" }
 ];
 
 @NgModule({

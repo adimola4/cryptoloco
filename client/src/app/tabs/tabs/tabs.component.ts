@@ -6,16 +6,16 @@ import {
 	AfterContentInit,
 	Input,
 	AfterContentChecked,
-  ChangeDetectorRef,
-  AfterViewChecked
-} from '@angular/core';
-import { TabItemComponent } from '../tab-item/tab-item.component';
-import { Observable, Subscription } from 'rxjs';
-import { startWith, map, take, tap, delay } from 'rxjs/operators';
+	ChangeDetectorRef,
+	AfterViewChecked
+} from "@angular/core";
+import { TabItemComponent } from "../tab-item/tab-item.component";
+import { Observable, Subscription } from "rxjs";
+import { startWith, map, take, tap, delay } from "rxjs/operators";
 
 @Component({
-	selector: 'app-tabs',
-	templateUrl: './tabs.component.html',
+	selector: "app-tabs",
+	templateUrl: "./tabs.component.html",
 	styles: [
 		`
 			.tabs-header {
@@ -31,7 +31,8 @@ import { startWith, map, take, tap, delay } from 'rxjs/operators';
 		`
 	]
 })
-export class TabsComponent implements AfterContentInit, AfterContentChecked, 	AfterViewChecked
+export class TabsComponent
+	implements AfterContentInit, AfterContentChecked, AfterViewChecked
 {
 	@ContentChildren(TabItemComponent)
 	tabs: QueryList<TabItemComponent>;
@@ -41,13 +42,13 @@ export class TabsComponent implements AfterContentInit, AfterContentChecked, 	Af
 	activeTab: TabItemComponent;
 
 	constructor(private cdRef: ChangeDetectorRef) {}
-  ngAfterViewChecked(): void {
+	ngAfterViewChecked(): void {
 		this.cdRef.detectChanges();
 	}
 
 	ngAfterContentInit(): void {
 		this.tabItems$ = this.tabs.changes
-			.pipe(startWith(''))
+			.pipe(startWith(""))
 			.pipe(delay(0))
 			.pipe(map(() => this.tabs.toArray()));
 	}

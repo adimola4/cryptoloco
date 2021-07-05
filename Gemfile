@@ -27,6 +27,8 @@ gem "nokogiri", ">= 1.5.0"
 gem "sidekiq", "5.2.7"
 gem "sidekiq-cron", "~> 1.1"
 gem "redis"
+gem 'kaminari' 
+
 
 gem "httparty"
 gem "twitter"

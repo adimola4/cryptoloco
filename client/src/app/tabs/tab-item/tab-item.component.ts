@@ -6,13 +6,13 @@ import {
 	ViewChild,
 	TemplateRef,
 	ContentChild
-} from '@angular/core';
-import { TabLabelComponent } from '../tab-label/tab-label.component';
-import { TabBodyComponent } from '../tab-body/tab-body.component';
+} from "@angular/core";
+import { TabLabelComponent } from "../tab-label/tab-label.component";
+import { TabBodyComponent } from "../tab-body/tab-body.component";
 
 @Component({
-	selector: 'app-tab-item',
-	templateUrl: './tab-item.component.html'
+	selector: "app-tab-item",
+	templateUrl: "./tab-item.component.html"
 })
 export class TabItemComponent implements OnInit {
 	@Input()
